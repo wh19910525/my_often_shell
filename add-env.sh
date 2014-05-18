@@ -6,9 +6,6 @@
 
 current_path=`pwd`
 
-#echo $current_path
-#ls $current_path
-
 ###### 1. main func ######
 my_bin_path_loop=0
 MY_SHELL_BIN_PATH=$current_path
@@ -34,10 +31,10 @@ has_add_globle_env=0
 for read_my_shell_bin_path in `cat $GLOBLE_ENV_FILE`
 do
 
-if [[ "$read_my_shell_bin_path" =~ "has_set_my_shell_bin_path=1" ]];then
-#   echo has_add_globle_env=1
-   has_add_globle_env=1
-fi
+	if [[ "$read_my_shell_bin_path" =~ "has_set_my_shell_bin_path=1" ]];then
+	#   echo has_add_globle_env=1
+	   has_add_globle_env=1
+	fi
 
 done
 
