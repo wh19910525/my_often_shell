@@ -1,0 +1,120 @@
+#!/bin/bash
+
+###################
+# Use this shell scrupt must be in tar top dir!!
+# author:wanghai
+#############################################
+#globle Variable
+all_project_list="all_project/project_and_git_list/project_list.txt"
+all_project_git_list="all_project/project_and_git_list/projiec_git_list.txt"
+decompression_zgj_all_project_count=0
+DATA=`date +%Y-%m-%d-%H-%M-%S`
+decompression_error="save_decompression_log"
+
+if [ $# != 1 ];then
+    rootfs_source_code_name="../806A1YBD$DATA"
+else
+tmp=$1
+arg1=${tmp#*/}
+    echo "22222222rootfs_source_code_name=$arg1"
+arg1=../${arg1//\//}
+echo ${arg1}1123
+    echo "22222222rootfs_source_code_name=$arg1"
+    rootfs_source_code_name="$arg1"
+fi
+echo "rootfs_source_git_code_name=$rootfs_source_code_name/repo/projects"
+echo "rootfs_source_git_code_name=$rootfs_source_code_name/repo/projects"
+rootfs_source_git_code_name="$rootfs_source_code_name/repo/projects"
+
+#####################
+echo "mkdir $rootfs_source_code_name -p"
+mkdir $rootfs_source_code_name -p
+mkdir $decompression_error
+
+
+#decompression all project
+if [ 0 -ne 1 ]; then
+
+    for read_all_project in `cat $all_project_list`
+    do 
+        ((decompression_zgj_all_project_count++))
+        echo "$decompression_zgj_all_project_count : $read_all_project"
+
+        echo "tar xf all_project/$read_all_project.tar.gz -C $rootfs_source_code_name"
+        tar xf all_project/$read_all_project.tar.gz -C $rootfs_source_code_name
+        if [ $? -eq 0 ]; then
+         
+            echo "tar $decompression_zgj_all_project_count : $read_all_project success !!"
+            echo
+
+        else
+          echo -e "\033[34m"
+            echo "tar failed!!"
+            echo "error project : $read_all_project" >> $decompression_error/project_error.txt
+          echo -e "\033[0m"
+        fi
+
+    done
+
+fi
+
+#######
+#decompression repo files
+if [ 0 -ne 1 ]; then
+    echo "tar xf all_project/repo_all_project_git/repo.tar.gz -C $rootfs_source_code_name"
+    tar xf all_project/repo_all_project_git/repo.tar.gz -C $rootfs_source_code_name
+    if [ $? -eq 0 ]; then
+     
+        echo "tar .repo success !!"
+        echo
+
+    else
+      echo -e "\033[34m"
+        echo "tar failed!!"
+        echo "error project : .repo" >> $decompression_error/project_git_error.txt
+      echo -e "\033[0m"
+    fi
+fi
+
+############
+#decompression_all_project_git
+decompression_zgj_all_project_git_count=0
+
+if [ 1 -ne 0 ]; then
+mkdir $rootfs_source_code_name/repo/projects -p
+for read_all_project in `cat $all_project_git_list`
+do 
+    ((decompression_zgj_all_project_git_count++))
+    echo "$decompression_zgj_all_project_git_count : $read_all_project"
+
+    echo "tar xf all_project/repo_all_project_git/$read_all_project.tar.gz -C $rootfs_source_git_code_name"
+    tar xf all_project/repo_all_project_git/$read_all_project.tar.gz -C $rootfs_source_git_code_name
+    if [ $? -eq 0 ]; then
+     
+        echo "tar $decompression_zgj_all_project_git_count : $read_all_project success !!"
+        echo
+
+    else
+      echo -e "\033[34m"
+        echo "tar failed!!"
+        echo "error project : $read_all_project" >> $decompression_error/project_git_error.txt
+      echo -e "\033[0m"
+    fi
+
+done
+
+
+
+has_error=`cat test`
+echo "$has_error"
+if [ -z $has_error ];then
+    echo " tar no error!!"
+    echo "mv $rootfs_source_code_name/repo $rootfs_source_code_name/.repo"
+    mv $rootfs_source_code_name/repo $rootfs_source_code_name/.repo
+else
+    echo " tar has error!!"
+    echo "please check log!!"
+fi
+
+fi
+
