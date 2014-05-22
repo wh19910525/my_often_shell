@@ -40,9 +40,7 @@ done
 
 if [ $has_add_globle_env -eq 1 ]
 then
-	echo "you have set the 'often use shell bin path in $GLOBLE_ENV_FILE' file !!"
-	echo "you need do '. $GLOBLE_ENV_FILE' , let you add all commands to take effect !!"
-	exit 0
+	sed -i '/^MY_SHELL_PATH/ c\MY_SHELL_PATH='"${MY_SHELL_BIN_PATH}"'' $GLOBLE_ENV_FILE
 else
 	echo "###### add by wanghai, add my often use shell scrupt ###### " >> $GLOBLE_ENV_FILE
 #	echo "set my often use shell scrupt path : has_set_my_shell_bin_path=1"
@@ -51,13 +49,14 @@ else
 	
 #	echo "set my often use shell bin path!"
 #	echo "export PATH=$PATH:$MY_SHELL_BIN_PATH >> $GLOBLE_ENV_FILE"
-	echo "export PATH=$PATH:$MY_SHELL_BIN_PATH" >> $GLOBLE_ENV_FILE
+	echo "MY_SHELL_PATH=$MY_SHELL_BIN_PATH" >> $GLOBLE_ENV_FILE
+    echo "export PATH=\$PATH:\$MY_SHELL_PATH" >> $GLOBLE_ENV_FILE
 	echo >> $GLOBLE_ENV_FILE
 	echo >> $GLOBLE_ENV_FILE
 	echo >> $GLOBLE_ENV_FILE
-	echo "set often use shell scrupt path success!!"
-	echo "you need do '. $GLOBLE_ENV_FILE' , let you add all commands to take effect !!"
 fi
 
+	echo "set often use shell scrupt path success!!"
+	echo "you need do '. $GLOBLE_ENV_FILE' , let you add all commands to take effect !!"
 
 
