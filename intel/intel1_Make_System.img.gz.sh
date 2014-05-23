@@ -46,7 +46,8 @@ make_SystemDir_to_SystemImgGz () {
 #echo "mkdir $Intel_android_top/$Tmp_Dir -p"
 mkdir $Intel_android_top/$Tmp_Dir -p
 
-#2test
+One_G=1073741824
+Two_G=2147483648
 #echo "$Intel_android_top/$Linux_X86_Tools_Dir/mkuserimg.sh $Source_Dir $Intel_android_top/$Tmp_Dir/system.img ext4 system 1073741824"
 #$Intel_android_top/$Linux_X86_Tools_Dir/mkuserimg.sh $Source_Dir $Intel_android_top/$Tmp_Dir/system.img ext4 system 2147483648
 #$Intel_android_top/$Linux_X86_Tools_Dir/mkuserimg.sh $Source_Dir $Intel_android_top/$Tmp_Dir/system.img ext4 system 1610612736

@@ -40,8 +40,8 @@ loop=0
         do
             ((loop++))
             echo pic: $loop 
-            echo convert $Source_Dir/$tmp_pic $Dst_path/$loop.jpg
-            convert $Source_Dir/$tmp_pic $Dst_path/$loop.jpg
+            echo convert $Source_Dir/$tmp_pic $Dst_path/00$loop.jpg
+            convert $Source_Dir/$tmp_pic $Dst_path/00$loop.jpg
 
         done
         exit 1
@@ -51,8 +51,8 @@ loop=0
         do
             ((loop++))
             echo pic: $loop 
-            echo convert $Source_Dir/$tmp_pic $Dst_path/$loop.png
-            convert $Source_Dir/$tmp_pic $Dst_path/$loop.png
+            echo convert $Source_Dir/$tmp_pic $Dst_path/00$loop.png
+            convert $Source_Dir/$tmp_pic $Dst_path/00$loop.png
         done
 
         exit 2
@@ -62,9 +62,13 @@ echo ===============
     do
         ((loop++))
         echo pic: $loop 
-        echo convert -resize  $Dst_size! $Source_Dir/$tmp_pic $Dst_path/${tmp_pic%.*}.jpg
-        convert -resize  $Dst_size! $Source_Dir/$tmp_pic $Dst_path/${tmp_pic%.*}.jpg
-        #convert $Source_Dir/$tmp_pic  -gravity center -crop $Dst_size+0+0 $Dst_path/${tmp_pic%.*}.jpg
+       ############## 强制 裁剪大小 ############
+       # echo convert -resize  $Dst_size! $Source_Dir/$tmp_pic $Dst_path/${tmp_pic%.*}.jpg
+       # convert -resize  $Dst_size! $Source_Dir/$tmp_pic $Dst_path/${tmp_pic%.*}.jpg
+       
+       ############## 从中心 裁剪 ############
+        echo convert $Source_Dir/$tmp_pic  -gravity center -crop $Dst_size+0+0 $Dst_path/${tmp_pic%.*}.jpg
+        convert $Source_Dir/$tmp_pic  -gravity center -crop $Dst_size+0+0 $Dst_path/${tmp_pic%.*}.jpg
     done
 
 }
