@@ -40,8 +40,8 @@ if [ -e $Current_path_has_git ]; then
     
     
 ############# push the current branch to server ##############
-        echo git push origin $Will_push2_server_branch:$Will_push2_server_branch
-#        git push origin $Will_push2_server_branch:$Will_push2_server_branch
+        #echo git push origin $Will_push2_server_branch:$Will_push2_server_branch
+        git push origin $Will_push2_server_branch:$Will_push2_server_branch
         if [ $? -eq 0 ]; then
             echo -en "\033[32m"
             echo "You have push the [$Will_push2_server_branch] --> Server[192.168.2.5] !!"
@@ -54,7 +54,7 @@ if [ -e $Current_path_has_git ]; then
         for read_git_config in `cat .git/config`
         do
             if [[ "$read_git_config" =~ "refs/heads/$Will_push2_server_branch" ]];then
-                echo "you can do 'git pull' !!"
+                echo "Next: you can do 'git pull' to sync you source code with git Server !!"
                 In_git_config_has_the_branch=1
             fi
         done
