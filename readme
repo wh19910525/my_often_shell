@@ -4,3 +4,8 @@ git clone git@github.com:wh19910525/my_often_shell.git
 #read
 git clone git://github.com/wh19910525/my_often_shell.git
 
+
+##############
+alias wb_repo="wb_repo.sh"
+
+
