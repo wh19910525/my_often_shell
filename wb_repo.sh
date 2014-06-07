@@ -39,6 +39,7 @@ wb_repo.sh [options]
         -- status
         -- checkout
         -- branch
+        -- pull
 
 "
     echo -en "\033[0m"
@@ -98,6 +99,25 @@ git_checkout (){
     echo
 }
 
+####### funtion6 ########
+git_pull (){
+    echo repositories : $globle_loop
+    if [ $# -eq 1 ]; then
+        cd $1 >> /dev/null
+        pwd
+        git branch $para2
+        git pull 
+        cd - >> /dev/null
+    else
+    
+        pwd
+        git branch $para2
+        git pull
+
+    fi
+    ((globle_loop++))
+    echo
+}
 
 
 ############# main func ##############
@@ -118,6 +138,7 @@ if [ $# -ne 0 ]; then
 
             git_status           
 
+        ###### git branch ######
         elif [ x$para1 = x"branch" ]; then
 
             for tmp in `ls` 
@@ -130,6 +151,7 @@ if [ $# -ne 0 ]; then
 
             git_branch
 
+        ###### git checkout ######
         elif [ x$para1 = x"checkout" ]; then
 
             for tmp in `ls` 
@@ -142,6 +164,18 @@ if [ $# -ne 0 ]; then
 
             git_checkout
 
+        ###### git pull ######
+        elif [ x$para1 = x"pull" ]; then
+
+            for tmp in `ls` 
+            do
+                if [ -d $tmp -a $tmp != .git -a $tmp != out ]; then
+                    git_pull $tmp
+                fi        
+
+            done
+
+            git_pull
         fi
 
     else
