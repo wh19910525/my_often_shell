@@ -53,6 +53,7 @@ if [ $# -eq 1 ]; then
     echo mv $current_source_code_all_top_dir_list $current_source_code_top_dir/.gitignore
     mv $current_source_code_all_top_dir_list $current_source_code_top_dir/.gitignore
 
+    echo Starting init [$loop : $current_source_code_top_dir] , waiting ....
     cd $current_source_code_top_dir
 
     echo git init .
@@ -66,7 +67,14 @@ if [ $# -eq 1 ]; then
 
     echo finish all init for android source code !! 
     echo
+
+echo "###################################
+##### end 1.Create all sub dir git ######
+###################################"
     echo
+
+
+
 
 fi
 fi
