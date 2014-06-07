@@ -135,6 +135,10 @@ git_push (){
     echo
 }
 
+
+
+
+
 ############# main func ##############
 if [ $# -ne 0 ]; then
 
@@ -145,7 +149,7 @@ if [ $# -ne 0 ]; then
 
             for tmp in `ls` 
             do
-                if [ -d $tmp -a $tmp != .git -a $tmp != out ]; then
+                if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
                     git_status $tmp
                 fi        
 
@@ -158,7 +162,7 @@ if [ $# -ne 0 ]; then
 
             for tmp in `ls` 
             do
-                if [ -d $tmp -a $tmp != .git -a $tmp != out ]; then
+                if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
                     git_branch $tmp
                 fi        
 
@@ -171,7 +175,7 @@ if [ $# -ne 0 ]; then
 
             for tmp in `ls` 
             do
-                if [ -d $tmp -a $tmp != .git -a $tmp != out ]; then
+                if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
                     git_checkout $tmp
                 fi        
 
@@ -184,21 +188,20 @@ if [ $# -ne 0 ]; then
 
             for tmp in `ls` 
             do
-                if [ -d $tmp -a $tmp != .git -a $tmp != out ]; then
+                if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
                     git_pull $tmp
                 fi        
 
             done
 
             git_pull
-        fi
 
         ###### git push ######
         elif [ x$para1 = x"push" ]; then
 
             for tmp in `ls` 
             do
-                if [ -d $tmp -a $tmp != .git -a $tmp != out ]; then
+                if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
                     git_push $tmp
                 fi        
 
