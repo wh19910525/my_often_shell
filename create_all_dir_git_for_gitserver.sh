@@ -19,8 +19,7 @@ Step1=1
 if [ $Step1 -eq 1 ]; then
 if [ $# -eq 1 ]; then
 
-    rm top_dir_list* >> /dev/null
-    for tmp in `ls $para1`
+    for tmp in `ls $current_source_code_top_dir`
     do
         if [ -d $current_source_code_top_dir/$tmp ]; then
 
@@ -51,8 +50,8 @@ if [ $# -eq 1 ]; then
 
     done
 
-    echo cp $current_source_code_all_top_dir_list $current_source_code_top_dir/.gitignore
-    cp $current_source_code_all_top_dir_list $current_source_code_top_dir/.gitignore
+    echo mv $current_source_code_all_top_dir_list $current_source_code_top_dir/.gitignore
+    mv $current_source_code_all_top_dir_list $current_source_code_top_dir/.gitignore
 
     cd $current_source_code_top_dir
 
@@ -66,6 +65,8 @@ if [ $# -eq 1 ]; then
     git commit -m"init android top dir !! " >> /dev/null
 
     echo finish all init for android source code !! 
+    echo
+    echo
 
 fi
 fi
@@ -96,7 +97,7 @@ if [ $# -eq 1 ]; then
 echo mkdir $save_top_all_sub_dir_git -p
 mkdir $save_top_all_sub_dir_git -p
 
-    for tmp in `ls $para1`
+    for tmp in `ls $current_source_code_top_dir`
     do
         if [ -d $current_source_code_top_dir/$tmp ]; then
 
