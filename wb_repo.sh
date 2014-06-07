@@ -13,15 +13,11 @@ current_path=`pwd`
 current_source_code_top_dir=$current_path/$para1
 current_data=`date "+%Y_%m_%d_%H_%M_%S"`
 
-
 #############################
 
 android_top_dir=android_source_code_$current_data
 git_server_addr=192.168.2.5
 on_git_server_android_source_code_name=all_sub_dir_git_init_2014_06_07
-no_has_git="$tmp != out -a $tmp != .git"
-
-
 
 ####### funtion1 ########
 usage_color () {
@@ -29,7 +25,6 @@ usage_color () {
     echo "  $1  "
     echo -en "\033[0m"
 }
-
 
 ####### funtion2 ########
 usage_help () {
@@ -40,6 +35,7 @@ wb_repo.sh [options]
         -- checkout
         -- branch
         -- pull
+        -- push
 
 "
     echo -en "\033[0m"
@@ -119,6 +115,25 @@ git_pull (){
     echo
 }
 
+####### funtion7 ########
+git_push (){
+    echo repositories : $globle_loop
+    if [ $# -eq 1 ]; then
+        cd $1 >> /dev/null
+        pwd
+        git branch $para2
+        git push 
+        cd - >> /dev/null
+    else
+    
+        pwd
+        git branch $para2
+        git push
+
+    fi
+    ((globle_loop++))
+    echo
+}
 
 ############# main func ##############
 if [ $# -ne 0 ]; then
@@ -176,6 +191,20 @@ if [ $# -ne 0 ]; then
             done
 
             git_pull
+        fi
+
+        ###### git push ######
+        elif [ x$para1 = x"push" ]; then
+
+            for tmp in `ls` 
+            do
+                if [ -d $tmp -a $tmp != .git -a $tmp != out ]; then
+                    git_push $tmp
+                fi        
+
+            done
+
+            git_push
         fi
 
     else
