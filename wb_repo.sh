@@ -37,6 +37,7 @@ wb_repo.sh [options]
         -- branch
         -- pull
         -- push
+        -- clean
 
 "
     echo -en "\033[0m"
@@ -192,11 +193,32 @@ git_push (){
             git push $1 $2
         fi
     fi
+
     ((globle_loop++))
     echo
 }
 
 
+####### funtion8 ########
+git_clean (){
+    echo repositories : $globle_loop
+    if [ $# -eq 2 ]; then
+        cd $1 >> /dev/null
+        pwd
+        echo git clean $2
+        git clean $2
+        cd - >> /dev/null
+    elif [ $# -eq 1 ]; then
+    
+        pwd
+        echo git clean $1
+        git clean $1
+
+    fi
+
+    ((globle_loop++))
+    echo
+}
 
 
 
@@ -305,12 +327,32 @@ if [ $# -ne 0 ]; then
                 for tmp in `ls` 
                 do
                     if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
-                        git_push $tmp $2 $3
+                        git_push $tmp $para2 $para3
                     fi        
 
                 done
 
-                git_push $2 $3
+                git_push $para2 $para3
+
+            fi
+        ###### git clean ######
+        elif [ x$para1 = x"clean" ]; then
+
+            if [ $# -eq 2 ];then
+
+                for tmp in `ls` 
+                do
+                    if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
+                        git_clean $tmp $para2
+                    fi        
+
+                done
+
+                git_clean $para2
+
+            else
+                echo "Please input [git clean -df] !!"
+                exit 2
 
             fi
 
