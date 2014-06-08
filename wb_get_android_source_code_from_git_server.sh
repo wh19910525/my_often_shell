@@ -80,3 +80,11 @@ if [ $Step1 -eq 1 ]; then
 fi
 
 
+Step2=1
+if [ $Step2 -eq 1 ]; then
+
+    pwd
+    ./auto-compile-android-src-code.sh
+
+fi
+
