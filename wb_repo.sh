@@ -6,11 +6,12 @@
 
 para1=$1
 para2=$2
+para3=$3
+para4=$4
 
 loop=1
 globle_loop=1
 current_path=`pwd`
-current_source_code_top_dir=$current_path/$para1
 current_data=`date "+%Y_%m_%d_%H_%M_%S"`
 
 #############################
@@ -81,16 +82,53 @@ git_branch (){
 git_checkout (){
     echo repositories : $globle_loop
     if [ $# -eq 1 ]; then
+        if [ -d $current_path/$1 ]; then
+            cd $1 >> /dev/null
+            pwd
+            git checkout .
+            cd - >> /dev/null
+        else
+            ## git checkout other_branch
+            pwd
+            git checkout $1
+        fi
+
+    elif [ $# -eq 2 ];then
+    
         cd $1 >> /dev/null
         pwd
-        git checkout .
+        git checkout $2
         cd - >> /dev/null
-    else
+
+    elif [ $# -eq 0 ];then
     
         pwd
         git checkout .
+    
+    elif [ $# -eq 3 ];then
+
+        cd $1 >> /dev/null
+        pwd
+
+        if [ $2 = "-b" ];then
+            git checkout $2 $3
+        elif [ $2 = "-t" ];then
+            git checkout $2 $3
+        fi
+
+        cd - >> /dev/null
+
+    elif [ $# -eq 2 ];then
+
+        pwd
+        if [ $1 = "-b" ];then
+            git checkout $1 $2
+        elif [ $1 = "-t" ];then
+            git checkout $1 $2
+        fi
 
     fi
+
     ((globle_loop++))
     echo
 }
@@ -121,15 +159,29 @@ git_push (){
     if [ $# -eq 1 ]; then
         cd $1 >> /dev/null
         pwd
-        git branch $para2
+        git branch 
         git push 
         cd - >> /dev/null
-    else
+    elif [ $# -eq 0 ]; then
     
         pwd
-        git branch $para2
+        git branch 
         git push
 
+    elif [ $# -eq 3 ]; then
+        cd $1 >> /dev/null
+        pwd
+        git branch
+        if [ $2 = origin ];then
+            git push $2 $3
+        fi
+        cd - >> /dev/null
+    elif [ $# -eq 2 ]; then
+        pwd
+        git branch
+        if [ $1 = origin ];then
+            git push $1 $2
+        fi
     fi
     ((globle_loop++))
     echo
@@ -172,16 +224,46 @@ if [ $# -ne 0 ]; then
 
         ###### git checkout ######
         elif [ x$para1 = x"checkout" ]; then
+           
+            ## git checkout . ##
+            if [ $# -eq 1 ];then
 
-            for tmp in `ls` 
-            do
-                if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
-                    git_checkout $tmp
-                fi        
+                for tmp in `ls` 
+                do
+                    if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
+                        git_checkout $tmp
+                    fi        
 
-            done
+                done
 
-            git_checkout
+                git_checkout
+            
+            ## git checkout other_branch ##
+            elif [ $# -eq 2 ];then
+
+                for tmp in `ls` 
+                do
+                    if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
+                        git_checkout $tmp $para2 
+                    fi        
+
+                done
+
+                git_checkout $para2 
+
+            ## git checkout -b/-t new_branch ##
+            elif [ $# -eq 3 ];then
+
+                for tmp in `ls` 
+                do
+                    if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
+                        git_checkout $tmp $para2 $para3
+                    fi        
+
+                done
+
+                git_checkout $para2 $para3
+            fi
 
         ###### git pull ######
         elif [ x$para1 = x"pull" ]; then
@@ -199,15 +281,29 @@ if [ $# -ne 0 ]; then
         ###### git push ######
         elif [ x$para1 = x"push" ]; then
 
-            for tmp in `ls` 
-            do
-                if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
-                    git_push $tmp
-                fi        
+            if [ $# -eq 1 ];then
 
-            done
+                for tmp in `ls` 
+                do
+                    if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
+                        git_push $tmp
+                    fi        
 
-            git_push
+                done
+
+                git_push
+            elif [ $# -eq 3 ];then
+                for tmp in `ls` 
+                do
+                    if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
+                        git_push $tmp $2 $3
+                    fi        
+
+                done
+
+                git_push $2 $3
+
+            fi
         fi
 
     else
@@ -232,51 +328,3 @@ fi
 
 
 ###############################
-
-Step1=0
-if [ $Step1 -eq 1 ]; then
-if [ $# -eq 1 ]; then
-
-mkdir $android_top_dir -p
-cd $android_top_dir
-
-
-    echo -en "\033[32m"
-
-    date "+%Y-%m-%d %H:%M:%S"
-    echo "Start get android source code from $git_server_addr:$on_git_server_android_source_code_name "
-
-    echo -en "\033[0m"
-
-
-for tmp_git_name in `cat $current_source_code_top_dir`
-do
-
-    #echo git clone  git@$git_server_addr:$on_git_server_android_source_code_name/$tmp_git_name
-    git clone  git@$git_server_addr:$on_git_server_android_source_code_name/$tmp_git_name
-    echo "$loop : Clone all_sub_dir_git_init_2014_06_07/$tmp_git_name successed!!"
-
-    echo 
-    echo 
-
-    ((loop++))
-done
-
-if [ -e android_top ]; then
-    pwd
-    mv android_top/* .
-    rm android_top -rf
-fi
-
-    echo -en "\033[35m"
-
-    echo "Finshed : get android source code from $git_server_addr:$on_git_server_android_source_code_name !!"
-    date "+%Y-%m-%d %H:%M:%S"
-
-    echo -en "\033[0m"
-fi
-fi
-
-################################
-
-
