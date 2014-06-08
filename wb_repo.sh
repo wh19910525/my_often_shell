@@ -96,11 +96,18 @@ git_checkout (){
         fi
 
     elif [ $# -eq 2 ];then
-    
-        cd $1 >> /dev/null
-        pwd
-        git checkout $2
-        cd - >> /dev/null
+        #git checkout other_branch
+        if [ -d $current_path/$1 ]; then
+            cd $1 >> /dev/null
+            pwd
+            git checkout $2
+            cd - >> /dev/null
+        #git checkout -t other_branch
+        elif [ "-t" = $1 ]; then
+            pwd
+            git checkout $1 $2
+
+        fi
 
     elif [ $# -eq 0 ];then
     
