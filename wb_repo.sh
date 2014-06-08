@@ -66,11 +66,13 @@ git_branch (){
     if [ $# -eq 1 ]; then
         cd $1 >> /dev/null
         pwd
+        echo git branch $para2
         git branch $para2
         cd - >> /dev/null
     else
     
         pwd
+        echo git branch $para2
         git branch $para2
 
     fi
@@ -304,6 +306,14 @@ if [ $# -ne 0 ]; then
                 git_push $2 $3
 
             fi
+
+        else
+            echo
+            usage_color "No [$para1] cmd!!"
+            echo
+            echo "-----------------------------------------------"
+            usage_help
+            
         fi
 
     else
