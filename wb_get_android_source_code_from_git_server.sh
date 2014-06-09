@@ -80,7 +80,7 @@ if [ $Step1 -eq 1 ]; then
 fi
 
 
-Step2=1
+Step2=0
 if [ $Step2 -eq 1 ]; then
 
     pwd
