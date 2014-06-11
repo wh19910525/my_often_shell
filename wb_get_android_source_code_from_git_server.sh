@@ -30,7 +30,7 @@ current_data=`date "+%Y_%m_%d_%H_%M_%S"`
 
 android_top_dir=android_source_code_$current_data
 git_server_addr=192.168.2.5
-on_git_server_android_source_code_name=all_sub_dir_git_init_2014_06_07
+on_git_server_android_source_code_name=intel_clovertral_p_android_4.4
 
 
 Step1=1
@@ -53,7 +53,7 @@ if [ $Step1 -eq 1 ]; then
 
         #echo git clone  git@$git_server_addr:$on_git_server_android_source_code_name/$tmp_git_name
         git clone  git@$git_server_addr:$on_git_server_android_source_code_name/$tmp_git_name
-        echo "$loop : Clone all_sub_dir_git_init_2014_06_07/$tmp_git_name successed!!"
+        echo "$loop : Clone $on_git_server_android_source_code_name/$tmp_git_name successed!!"
 
         echo 
         echo 
