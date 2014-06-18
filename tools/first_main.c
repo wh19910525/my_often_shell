@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-///////////////////////
+//1. 显示 软件功能 和 使用方法
 void show_tools_info(){
 	int error = 0;
 	char shell_cmd1[300] = "./mybin/program_fuc_list.sh";
@@ -26,19 +26,13 @@ void show_tools_info(){
 
 
 
-int main(int shell_cmd1c, char **argv){
-
-	char * i_am_the_delimiter1 = 	"###########################################";
-	char * sw_has_func_list = 	"# 本软件具有两大功能:                     #";
-	char * sw_has_func1 = 		"#     功能1 : 解压 微步 4.2升级固件！！   #";
-	char * sw_has_func2 = 		"#     功能2 : 压缩 微步 4.2升级固件！！   #";
-	char * i_am_the_delimiter2 = 	"###########################################";
+int main(int argc, char **argv){
 
 	///////////////////////
 	int error = 0;
 	int i = 0;
 
-
+	char * Customer_tools_FW = "Customer_tools_FW";
 
 
 
@@ -62,9 +56,21 @@ int main(int shell_cmd1c, char **argv){
 	show_tools_info();
 
 	//2.解压 intel 工具固件升级包
+	if(access(Customer_tools_FW, 0) == -1)//access函数是查看文件是不是存在; 
+	{  
+		printf("Dir [%s] no exits, so Creat it !!\n", Customer_tools_FW);  
+		if (mkdir(Customer_tools_FW, 0777))//如果不存在就用mkdir函数来创建;  
+		{  
+			printf("creat file  [%s] failed!!!\n", Customer_tools_FW);  
+			return -1;
+		}  
+	}else{
+		printf("Dir [%s] exits !!\n", Customer_tools_FW);  
+	} 
 
-
-	//3.
+	//解压
+	//zip -d arg
+	//解析 参数;
 
 
 
@@ -78,8 +84,8 @@ int main(int shell_cmd1c, char **argv){
 	strcat(shell_cmd1, " ");
 
 	//解析 参数;
-	for(i=1; i < shell_cmd1c; i++){
-	//	printf("shell_cmd1v[%d] = %s\n", i, argv[i]);
+	for(i=1; i < argc; i++){
+	//	printf("argv[%d] = %s\n", i, argv[i]);
 		strcat(shell_cmd1, argv[i]);
 		strcat(shell_cmd1, " ");
 	}
