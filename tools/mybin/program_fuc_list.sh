@@ -107,7 +107,7 @@ color_loop=0
 Program_has_func_list () {
 	echo -en "\033[3${color_loop}m"
 	#echo -en "\033[32m"
-	echo "Para1=$Para1"
+#	echo "Para1=$Para1"
 #	echo "Para2=$Para2"
 #	echo "Para3=$Para3"
 #	echo "Para4=$Para4"
@@ -134,6 +134,7 @@ Program_has_func_list () {
 	echo    "#     功能1 : weibu_tools -d 固件升级包 --> 解压 [固件升级包]  #";
 	echo    "#     功能2 : 压缩 微步 4.2升级固件！！   #";
 	echo    "###########################################";
+	echo
 
 
 	echo -en "\033[0m"

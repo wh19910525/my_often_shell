@@ -12,7 +12,7 @@ void show_tools_info(){
 		printf("\nExecute [%s] failed!!\n\n", shell_cmd1);
 	}else{
 
-		printf("\nExecute [%s] successed!!\n\n", shell_cmd1);
+//		printf("\nExecute [%s] successed!!\n\n", shell_cmd1);
 	}
 }
 
