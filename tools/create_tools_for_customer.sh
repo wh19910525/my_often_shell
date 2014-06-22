@@ -10,6 +10,8 @@
 WB_Customer_tools=WB-Customer-tools
 tools_bin=test/$WB_Customer_tools
 my_bin=mybin
+current_path=`pwd`
+core_program=wb_android_tools
 
 
 ######### func1 #########
@@ -19,21 +21,28 @@ Program_has_func_list () {
 
 	mkdir $tools_bin -p
 	git checkout mybin	
+
 	for i in `ls mybin`
 	do
-		if [ -f mybin/version.txt ];then
-			wangha_no_use=1
+		if [  x$i == xversion.txt ];then
+			echo "skip version.txt"
 		else
 			gzexe mybin/$i	
 		fi
 	done
 
+
+
 	rm mybin/*~
 	cp mybin $tools_bin -rf
+	cp add_for_customer.sh $tools_bin/install.sh
+	cp readme.txt  $tools_bin
 	
 	make
-	cp wb_android_tools $tools_bin
+	cp $core_program $tools_bin/
 	make clean
+
+
 
 	cd test
 	tar cvzf WB-Customer-tools.tar.gz WB-Customer-tools
@@ -41,6 +50,7 @@ Program_has_func_list () {
 	cd -	
 
 	git checkout mybin	
+	rm $tools_bin -rf
 
 	echo -en "\033[0m"
 }
