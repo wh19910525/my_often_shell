@@ -42,7 +42,7 @@ done
 
 if [ $has_add_globle_env -eq 1 ]
 then
-	sed -i '/^MY_SHELL_PATH/ c\MY_SHELL_PATH='"${MY_SHELL_BIN_PATH}"'' $GLOBLE_ENV_FILE
+	sed -i '/^MY_Often_Shell_PATH/ c\MY_Often_Shell_PATH='"${MY_SHELL_BIN_PATH}"'' $GLOBLE_ENV_FILE
 else
 	echo "###### add by wanghai, add my often use shell scrupt ###### " >> $GLOBLE_ENV_FILE
 #	echo "set my often use shell scrupt path : has_set_my_shell_bin_path=1"
@@ -51,14 +51,21 @@ else
 	
 #	echo "set my often use shell bin path!"
 #	echo "export PATH=$PATH:$MY_SHELL_BIN_PATH >> $GLOBLE_ENV_FILE"
-	echo "MY_SHELL_PATH=$MY_SHELL_BIN_PATH" >> $GLOBLE_ENV_FILE
-    echo "export PATH=\$PATH:\$MY_SHELL_PATH" >> $GLOBLE_ENV_FILE
+	echo "MY_Often_Shell_PATH=$MY_SHELL_BIN_PATH" >> $GLOBLE_ENV_FILE
+    	echo "export PATH=\$PATH:\$MY_Often_Shell_PATH" >> $GLOBLE_ENV_FILE
 	echo >> $GLOBLE_ENV_FILE
 	echo >> $GLOBLE_ENV_FILE
 	echo >> $GLOBLE_ENV_FILE
 fi
 
+	echo -en "\033[32m"
+	echo
+	date "+%Y-%m-%d %H:%M:%S"
 	echo "set often use shell scrupt path success!!"
 	echo "you need do '. $GLOBLE_ENV_FILE' , let you add all commands to take effect !!"
+	echo
+
+	echo -en "\033[0m"
+
 
 
