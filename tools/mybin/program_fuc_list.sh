@@ -131,8 +131,8 @@ Program_has_func_list () {
 	echo -en "\033[3${color_loop}m"
 	echo    "******************************************";
 	echo    "# 使用方法:                     #";
-	echo    "#     功能1 : weibu_tools -d 固件升级包 --> 解压 [固件升级包]  #";
-	echo    "#     功能2 : weibu_tools -c Modify_intel_FW --> 创建 新的 intel 固件升级包#";
+	echo    "#     功能1 : weibu_tools -d ./Old_intel_tools.zip --> 解压 [Old_intel_tools.zip] #";
+	echo    "#     功能2 : weibu_tools -c ./New_intel_tools.zip --> 创建 [New_intel_tools.zip] #";
 	echo    "###########################################";
 	echo
 

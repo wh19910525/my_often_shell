@@ -30,7 +30,7 @@ Check_fw_is_weibu () {
 
 	if [ -e $Top_modify_intel_fw_must_exist_file ];then
 		wanghai_no_use=1
-		echo "$Top_modify_intel_fw_dir_path  is Intel FW top dir!!"
+#		echo "$Top_modify_intel_fw_dir_path  is Intel FW top dir!!"
 	else
 		echo 
 
@@ -46,13 +46,13 @@ Check_fw_is_weibu () {
 			
 		done
 
-		echo -en "\033[0m"
 		echo 
 	fi
-		exit 0
-	echo
 
+	echo
 	echo -en "\033[0m"
+	exit 0
+
 }
 
 ####### main func #########

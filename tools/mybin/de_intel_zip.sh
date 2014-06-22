@@ -28,14 +28,13 @@ Decompression_intel_upgrade_fw () {
 
 	echo -en "\033[3${color_loop}m"
 
+	echo 
+	echo "正在 解压 ,可能 需要1分钟，请稍等 ..."
 	#echo unzip $Para1 -d $Save_intel_tools_upgrade_package
-	unzip $Para1 -d $Save_intel_tools_upgrade_package
+	unzip $Para1 -d $Save_intel_tools_upgrade_package > /dev/null
 	if [ $? -eq 0 ];then #unzip success ,return 0;
-		echo 
 		echo -en "\033[35m"
 		wanghai_no_use=1
-		echo "正在 解压 请稍等 ..."
-		
 	else
 		echo -en "\033[3${color_loop}m"
 		echo 

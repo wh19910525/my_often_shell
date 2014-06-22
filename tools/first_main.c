@@ -15,17 +15,23 @@ int decompression_system_img_gz_for_42(void);
 int mount_system_img_for_ext4(void);
 int chmod_modify_system_dir_777(void);
 
+int compress_2_intel_fw(char * fw_name);
+
 ////////// Globle varible /////////////
 char * Customer_tools_FW = "Customer_tools_FW";
 char * intel_tools_set_file = "flash.xml";
 char * Modify_system_img_dir = "Modify_system_img_dir";
 char * System_img_mount_dir_name="modify_system";
+
 char * shell_cmd1 = "./mybin/check_root.sh ";
 char * shell_cmd2 = "./mybin/program_fuc_list.sh ";
 char * shell_cmd3 = "./mybin/check_fw_zip.sh ";
 char * shell_cmd4 = "./mybin/de_intel_zip.sh ";
 char * shell_cmd5 = "./mybin/check_fw_is_weibu.sh ";
+char * shell_cmd6 = "./mybin/check_prop_for_encrypt.sh ";
+char * shell_cmd7 = "./mybin/show_finish_intel_fw.sh ";
 
+char current_cmd_path[MAXBUFSIZE];
 char tmp_cmd[MAXBUFSIZE];
 
 char * intel_4_2_system_name="system.img.gz";
@@ -39,8 +45,7 @@ int main(int argc, char **argv){
 	///////////////////////
 
 	int error = 0;
-
-	char * input_fw_prot = "Please use [wb_android_tools 固件名.zip]!!";
+	char flag = 'd';
 
 	///////////////////////
 
@@ -48,7 +53,7 @@ int main(int argc, char **argv){
 	error = excu_no_para_shell_get_return_int(shell_cmd1);
 	if(error != 0)
 	{
-		printf("%d : error: %d\n excu : [%s] failed!!\n\n", __LINE__, error, shell_cmd1);
+//		printf("%d : error: %d\n excu : [%s] failed!!\n\n", __LINE__, error, shell_cmd1);
 		goto check_root_error1;
 	}
 
@@ -56,54 +61,106 @@ int main(int argc, char **argv){
 	if(argc != 3){
 		//2.1 显示 软件功能 和 使用 方法;	
 		show_tools_info(shell_cmd2);
-		goto check_para_error2;
-	}
-	
-	//3.解压 intel 升级包
-	error = decompression_intel_upgrade_fw(argv[2]);
-	if(error != 0)
-	{
-		goto check_root_error1;
-	}
-	
-	
-	//4.调用一个脚本，把 所有的 东西放到 顶层目录下，并且做 校验，是否为 weibu 固件; 
-	memset(tmp_cmd, '\0', sizeof(tmp_cmd));
-	getcwd(tmp_cmd, MAXBUFSIZE);//获取 当前路径，给到 shell;
-//	strcat(tmp_cmd, "/");
-//	strcat(tmp_cmd, intel_tools_set_file);
-//	printf("current path=%s\n", tmp_cmd);
-	error = excu_shell_para_get_return_int(shell_cmd5, tmp_cmd);
-	if(error != 0)
-	{
 		goto check_root_error1;
 	}
 
-	//5.解压 system.img.gz for 4.2
-	error = decompression_system_img_gz_for_42();
-	if(error != 0)
-	{
-		goto check_root_error1;
+	if(strncmp(argv[1], "-d", 2) == 0){
+		flag = 'd';
+	}else if(strncmp(argv[1], "-D", 2) == 0){
+		flag = 'D';
+	}else if(strncmp(argv[1], "-c", 2) == 0){
+		flag = 'c';
+	}else if(strncmp(argv[1], "-C", 2) == 0){
+		flag = 'C';
 	}
 
-	//6 挂载system.img;
-	error = mount_system_img_for_ext4();
-	if(error != 0)
-	{
-		goto check_root_error1;
-	}
-	
-//wanghai
-	//7.chmod 777 -R $Intel_android_top/$Tmp_Dir/m_system/ 修改 挂载点的 权限为 777
-	error = chmod_modify_system_dir_777();
-	if(error != 0)
-	{
-		goto check_root_error1;
+	switch(flag){
+		case 'D':
+		case 'd':
+		//	printf("Decompression Old_intel_tools.zip\n\n");	
+			//3.解压 intel 升级包
+			error = decompression_intel_upgrade_fw(argv[2]);
+			if(error != 0)
+			{
+				goto check_root_error1;
+			}
+
+
+			//4.调用一个脚本，把 所有的 东西放到 顶层目录下，并且做 校验，是否为 weibu 固件; 
+			memset(tmp_cmd, '\0', sizeof(tmp_cmd));
+			getcwd(tmp_cmd, MAXBUFSIZE);//获取 当前路径，给到 shell;
+			//	strcat(tmp_cmd, "/");
+			//	strcat(tmp_cmd, intel_tools_set_file);
+			//	printf("current path=%s\n", tmp_cmd);
+			error = excu_shell_para_get_return_int(shell_cmd5, tmp_cmd);
+			if(error != 0)
+			{
+				goto check_root_error1;
+			}
+
+			//5.解压 system.img.gz for 4.2
+			error = decompression_system_img_gz_for_42();
+			if(error != 0)
+			{
+				goto check_root_error1;
+			}
+
+			//6 挂载system.img;
+			error = mount_system_img_for_ext4();
+			if(error != 0)
+			{
+				printf("\n\n Mount failed!! \n\n");
+				goto check_root_error1;
+			}
+
+			//wanghai
+			//7.chmod 777 -R $Intel_android_top/$Tmp_Dir/m_system/ 修改 挂载点的 权限为 777
+			error = chmod_modify_system_dir_777();
+			if(error != 0)
+			{
+				goto check_root_error1;
+			}
+
+			break;
+
+		case 'C':
+		case 'c':
+//			printf("Compression New_intel_tools.zip\n\n");	
+
+			//1.检查 之前解压的 system.img 是不是 微步源码 编译出来的, 若是 卸载 system.img; 	
+			memset(tmp_cmd, '\0', sizeof(tmp_cmd));
+			getcwd(tmp_cmd, MAXBUFSIZE);//获取 当前路径，给到 shell;
+			error = excu_shell_para_get_return_int(shell_cmd6, tmp_cmd);
+			if(error != 0)
+			{
+//				printf("This FW is not weibu!!\n\n");	
+				goto check_root_error1;
+			}
+
+			//2.重新 打包为 intel 升级工具 需要的 zip 包；
+			//zip -r New_intel_fw.zip Customer_tools_FW/
+			error = compress_2_intel_fw(argv[2]);
+			if(error != 0)
+			{
+				goto check_root_error1;
+			}
+
+			//3.提示 打包完成;
+			error = excu_shell_para_get_return_int(shell_cmd7, argv[2]);
+			if(error != 0)
+			{
+				goto check_root_error1;
+			}
+
+
+///////////////////////////////
+
+			break;
+
 	}
 
 	return 0;
 
-check_para_error2:
 check_root_error1:
 
 	return 1;
@@ -165,8 +222,6 @@ int mount_system_img_for_ext4(void){
 			return -1;
 		}  
 
-	}else{
-//		printf("Dir [%s] exits !!\n", tmp_cmd);  
 	} 
 
 	//6.2 ext4 -o loop  Modify_system_img_dir/before_system.img Modify_system_img_dir/modify_system
@@ -202,8 +257,6 @@ int decompression_system_img_gz_for_42(void){
 			printf("creat file  [%s] failed!!!\n", Modify_system_img_dir);  
 			return -1;
 		}  
-	}else{
-		printf("\n\nDir [%s] exits !!\n\n", Modify_system_img_dir);  
 	} 
 #if 0
 	//5.2 拷贝 system.img.gz 为 before_system.img.gz
@@ -226,8 +279,6 @@ int decompression_system_img_gz_for_42(void){
 	}
 #endif
 
-	
-	//5.3需要在 shell里 做一个卸载动作: umount $Intel_android_top/$Tmp_Dir/m_system -l > /dev/null
 
 	//5.4 解压 4.2 system.img.gz
 	memset(tmp_cmd, '\0', sizeof(tmp_cmd));
@@ -283,7 +334,7 @@ int decompression_intel_upgrade_fw(char * d_file){
 		}	
 
 	}else{
-		printf("Dir [%s] exits !!\n", Customer_tools_FW);  
+		printf("Dir [%s] exits, First: Please delete it  !!\n\n", Customer_tools_FW);  
 		goto check_fw_error3;
 	} 
 	
@@ -313,10 +364,53 @@ int excu_no_para_shell_get_return_int(char * shell_cmd){
 	int error = 0;
 //	printf("%d : cmd = [%s]\n", __LINE__, shell_cmd);
 	error = system(shell_cmd);
+#if 0
 	if(error != 0)
 	{
 		printf("\n [%s] failed!!\n\n", shell_cmd);
 	}
+#endif
 	return error;
 }
+
+///////////////// 以下 部分是 解压 函数 //////////////////
+
+//1 修改 挂载点 的权限 为 -> 777
+int compress_2_intel_fw(char * fw_name){
+
+	int error = 0;
+
+	memset(tmp_cmd, '\0', sizeof(tmp_cmd));
+	memset(current_cmd_path, '\0', sizeof(tmp_cmd));
+	strcat(tmp_cmd, "zip -rj ");
+	//			getcwd(current_cmd_path, MAXBUFSIZE);//获取 当前路径;
+	//			strcat(tmp_cmd, current_cmd_path);
+	//			strcat(tmp_cmd, "/");
+	strcat(tmp_cmd, fw_name);
+
+	strcat(tmp_cmd, " ");
+
+//	getcwd(current_cmd_path, MAXBUFSIZE);//获取 当前路径;
+//	strcat(tmp_cmd, current_cmd_path);
+//	strcat(tmp_cmd, "/");
+	strcat(tmp_cmd, Customer_tools_FW);
+
+//	printf("%d : cmd = %s\n", __LINE__, tmp_cmd);
+	error = excu_no_para_shell_get_return_int(tmp_cmd);
+	if(error != 0)
+	{
+		printf("----------------\n\n");	
+		return -1;
+	}
+
+	return error;
+}
+
+
+
+
+
+
+
+
 
