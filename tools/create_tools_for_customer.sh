@@ -35,7 +35,10 @@ Program_has_func_list () {
 
 	rm mybin/*~
 	cp mybin $tools_bin -rf
+	gzexe add_for_customer.sh
 	cp add_for_customer.sh $tools_bin/install.sh
+	git checkout add_for_customer.sh
+	rm *~
 	cp readme.txt  $tools_bin
 	
 	make

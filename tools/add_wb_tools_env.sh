@@ -8,7 +8,8 @@ current_path=`pwd`
 
 my_bin_path_loop=0
 MY_SHELL_BIN_PATH=$current_path
-Need_filter_dir=mybin
+Need_filter_dir1=mybin
+Need_filter_dir2=test
 GLOBLE_ENV_FILE="/etc/bash.bashrc"
 has_add_globle_env=0
 Will_save_all_program_path=/usr/local/wh/tools
@@ -18,7 +19,7 @@ if [ $Step1 -eq 1 ];then
 	###### 1. main func ######
 	for my_bin_dir in `ls $current_path`
 	do
-		if [ -d $my_bin_dir -a x$my_bin_dir != x$Need_filter_dir ]
+		if [ -d $my_bin_dir -a x$my_bin_dir != x$Need_filter_dir1 -a x$my_bin_dir != x$Need_filter_dir2 ]
 		then
 			((my_bin_path_loop++))
 			tmp_my_bin_path=$current_path/$my_bin_dir
@@ -41,28 +42,17 @@ if [ $Step1 -eq 1 ];then
 
 	if [ $has_add_globle_env -eq 1 ]
 	then
-		sed -i '/^MY_SHELL_PATH/ c\MY_SHELL_PATH='"${MY_SHELL_BIN_PATH}"'' $GLOBLE_ENV_FILE
+		sed -i '/^MY_WeiBu_Tools_PATH/ c\MY_WeiBu_Tools_PATH='"${MY_SHELL_BIN_PATH}"'' $GLOBLE_ENV_FILE
 	else
 		echo
 		echo "###### add by wanghai, add my often use shell scrupt ###### " >> $GLOBLE_ENV_FILE
 		echo "has_set_wb_tools_for_intel=1" >>  $GLOBLE_ENV_FILE
 		
-		echo "MY_SHELL_PATH=$MY_SHELL_BIN_PATH" >> $GLOBLE_ENV_FILE
-		echo "export PATH=\$PATH:\$MY_SHELL_PATH" >> $GLOBLE_ENV_FILE
+		echo "MY_WeiBu_Tools_PATH=$MY_SHELL_BIN_PATH" >> $GLOBLE_ENV_FILE
+		echo "export PATH=\$PATH:\$MY_WeiBu_Tools_PATH" >> $GLOBLE_ENV_FILE
 		echo >> $GLOBLE_ENV_FILE
 		echo >> $GLOBLE_ENV_FILE
 	fi
-################################
-
-	#wanghai	
-	echo mkdir -p $Will_save_all_program_path
-	echo cp $current_path/mybin $Will_save_all_program_path/ -rf
-	
-
-
-
-
-################################
 
 	echo -en "\033[32m"
 	echo
