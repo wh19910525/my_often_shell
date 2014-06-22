@@ -61,7 +61,8 @@ int main(int argc, char **argv){
 
 	if(argc > 1){
 
-		if(strncmp(argv[1], "-v", 2) == 0 || strncmp(argv[1], "-V", 2) == 0 || strncmp(argv[1], "--V", 3) || strncmp(argv[1], "--v", 3)){
+		if(strncmp(argv[1], "-v", 2) == 0 || strncmp(argv[1], "-V", 2) == 0 || 
+			strncmp(argv[1], "--V", 3) == 0 || strncmp(argv[1], "--v", 3) == 0){
 			show_version();
 			return 0;
 		}
