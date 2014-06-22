@@ -21,7 +21,11 @@ Program_has_func_list () {
 	git checkout mybin	
 	for i in `ls mybin`
 	do
-		gzexe mybin/$i	
+		if [ -f mybin/version.txt ];then
+			wangha_no_use=1
+		else
+			gzexe mybin/$i	
+		fi
 	done
 
 	rm mybin/*~
