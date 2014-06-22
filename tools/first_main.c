@@ -14,6 +14,7 @@ int decompression_intel_upgrade_fw(char * d_file);
 int decompression_system_img_gz_for_42(void);
 int mount_system_img_for_ext4(void);
 int chmod_modify_system_dir_777(void);
+void show_version(void);
 
 int compress_2_intel_fw(char * fw_name);
 
@@ -30,6 +31,7 @@ char * shell_cmd4 = "./mybin/de_intel_zip.sh ";
 char * shell_cmd5 = "./mybin/check_fw_is_weibu.sh ";
 char * shell_cmd6 = "./mybin/check_prop_for_encrypt.sh ";
 char * shell_cmd7 = "./mybin/show_finish_intel_fw.sh ";
+char * shell_cmd8 = "./mybin/show_version.sh ";
 
 char current_cmd_path[MAXBUFSIZE];
 char tmp_cmd[MAXBUFSIZE];
@@ -57,6 +59,13 @@ int main(int argc, char **argv){
 		goto check_root_error1;
 	}
 
+	if(argc > 1){
+
+		if(strncmp(argv[1], "-v", 2) == 0 || strncmp(argv[1], "-V", 2) == 0 || strncmp(argv[1], "--V", 3) || strncmp(argv[1], "--v", 3)){
+			show_version();
+			return 0;
+		}
+	}
 	//2.验证 参数 有没有输入 固件名称;
 	if(argc != 3){
 		//2.1 显示 软件功能 和 使用 方法;	
@@ -167,6 +176,16 @@ check_root_error1:
 }//end main;
 
 ///////////////////
+
+void show_version(void){
+	int error = 0;
+	error = system(shell_cmd8);
+	if(error != 0)
+	{
+		printf("\nExecute [%s] failed!!\n\n", shell_cmd8);
+	}
+}
+
 
 //1. 显示 软件功能 和 使用方法
 void show_tools_info(char * shell_cmd){
