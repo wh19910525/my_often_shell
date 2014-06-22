@@ -18,7 +18,7 @@ if [ $Step1 -eq 1 ];then
 	###### 1. main func ######
 	for my_bin_dir in `ls $current_path`
 	do
-		if [ -d $my_bin_dir -a x$my_bin_dir != x$my_bin_dir ]
+		if [ -d $my_bin_dir -a x$my_bin_dir != x$Need_filter_dir ]
 		then
 			((my_bin_path_loop++))
 			tmp_my_bin_path=$current_path/$my_bin_dir
