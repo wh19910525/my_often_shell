@@ -24,14 +24,14 @@ char * intel_tools_set_file = "flash.xml";
 char * Modify_system_img_dir = "Modify_system_img_dir";
 char * System_img_mount_dir_name="modify_system";
 
-char * shell_cmd1 = "./mybin/check_root.sh ";
-char * shell_cmd2 = "./mybin/program_fuc_list.sh ";
-char * shell_cmd3 = "./mybin/check_fw_zip.sh ";
-char * shell_cmd4 = "./mybin/de_intel_zip.sh ";
-char * shell_cmd5 = "./mybin/check_fw_is_weibu.sh ";
-char * shell_cmd6 = "./mybin/check_prop_for_encrypt.sh ";
-char * shell_cmd7 = "./mybin/show_finish_intel_fw.sh ";
-char * shell_cmd8 = "./mybin/show_version.sh ";
+char * shell_cmd1 = "/usr/local/wh/tools/mybin/check_root.sh ";
+char * shell_cmd2 = "/usr/local/wh/tools/mybin/program_fuc_list.sh ";
+char * shell_cmd3 = "/usr/local/wh/tools/mybin/check_fw_zip.sh ";
+char * shell_cmd4 = "/usr/local/wh/tools/mybin/de_intel_zip.sh ";
+char * shell_cmd5 = "/usr/local/wh/tools/mybin/check_fw_is_weibu.sh ";
+char * shell_cmd6 = "/usr/local/wh/tools/mybin/check_prop_for_encrypt.sh ";
+char * shell_cmd7 = "/usr/local/wh/tools/mybin/show_finish_intel_fw.sh ";
+char * shell_cmd8 = "/usr/local/wh/tools/mybin/show_version.sh ";
 
 char current_cmd_path[MAXBUFSIZE];
 char tmp_cmd[MAXBUFSIZE];

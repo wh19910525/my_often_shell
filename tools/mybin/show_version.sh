@@ -18,10 +18,9 @@ Para4=$4
 color_loop=0
 Program_has_func_list () {
 	echo -en "\033[35m"
-
 	echo 
 	echo "wb_android_tools : Version 1.0.0 !!"
-	cat mybin/version.txt
+	cat /usr/local/wh/tools/mybin/version.txt
 	echo 
 	echo -en "\033[0m"
 }
