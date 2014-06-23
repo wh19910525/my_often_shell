@@ -103,14 +103,9 @@ Para4=$4
 ##############################################
 
 ######### func1 #########
-color_loop=0
+color_loop=2
 Program_has_func_list () {
 	echo -en "\033[3${color_loop}m"
-	#echo -en "\033[32m"
-#	echo "Para1=$Para1"
-#	echo "Para2=$Para2"
-#	echo "Para3=$Para3"
-#	echo "Para4=$Para4"
 
 	echo
 	echo    "###########################################";
