@@ -46,7 +46,7 @@ if [ -f $read_prop_file ];then
 
 		if [[ "$read_prop" =~ $check_info ]];then
 
-			umount $Modify_System_img_Top_dir
+			umount $Modify_System_img_Top_dir -l
 			echo 
 			echo 
 			echo "正在 创建 新的 升级固件, 需要 3分钟, 请稍等...!!"
