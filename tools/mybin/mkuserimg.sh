@@ -53,16 +53,12 @@ if [ -n "$FC" ]; then
 fi
 
 absolute_path_make_ext4fs="/usr/local/wh/tools/mybin"
-echo
-echo
-echo ============ start ===================
-MAKE_EXT4FS_CMD="$absolute_path_make_ext4fs/make_ext4fs $ENABLE_SPARSE_IMAGE $FCOPT -l $SIZE -a $MOUNT_POINT $OUTPUT_FILE $SRC_DIR"
-echo "zgj=$MAKE_EXT4FS_CMD"
-echo ============ end ===================
-echo
-echo
+#MAKE_EXT4FS_CMD="make_ext4fs $ENABLE_SPARSE_IMAGE $FCOPT -l $SIZE -a $MOUNT_POINT $OUTPUT_FILE $SRC_DIR"
 MAKE_EXT4FS_CMD="$absolute_path_make_ext4fs/make_ext4fs $ENABLE_SPARSE_IMAGE $FCOPT -l $SIZE -a $MOUNT_POINT $OUTPUT_FILE $SRC_DIR"
 
+echo
+echo
+echo ===========================
 $MAKE_EXT4FS_CMD
 if [ $? -ne 0 ]; then
   exit 4
