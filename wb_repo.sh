@@ -13,6 +13,8 @@ loop=1
 globle_loop=1
 current_path=`pwd`
 current_data=`date "+%Y_%m_%d_%H_%M_%S"`
+manifest_file=$current_path/manifest_$current_data
+dir_has_git=".git/config"
 
 #############################
 
@@ -38,6 +40,7 @@ wb_repo.sh [options]
         -- pull
         -- push
         -- clean
+	-- manifest
 
 "
     echo -en "\033[0m"
@@ -220,7 +223,35 @@ git_clean (){
     echo
 }
 
+####### funtion9 ########
+manifest (){
+	for tmp in `ls`
+	do
+		if [ -f $current_path/$tmp/$dir_has_git ];then
+			
+			cd $current_path/$tmp > /dev/null
+			
+			tmp_current_branch=`git branch -a | sed -n '/'*'/p'`
+			current_git_branch=${tmp_current_branch##*\ }		
+			first_commit_value=`git log . | head -n 1`
+			echo "$tmp:$current_git_branch:${first_commit_value#* }" >> $manifest_file	
 
+			cd - > /dev/null
+
+		fi
+
+
+
+	done
+
+	if [ -f $current_path/$dir_has_git ];then
+		tmp_current_branch=`git branch -a | sed -n '/'*'/p'`
+		current_git_branch=${tmp_current_branch##*\ }		
+		first_commit_value=`git log . | head -n 1`
+		echo "android_top_dir:$current_git_branch:${first_commit_value#* }" >> $manifest_file	
+			
+	fi	
+}
 
 ############# main func ##############
 if [ $# -ne 0 ]; then
@@ -355,6 +386,11 @@ if [ $# -ne 0 ]; then
                 exit 2
 
             fi
+
+        ###### manifest ######
+        elif [ x$para1 = x"manifest" ]; then
+
+		manifest
 
         else
             echo
