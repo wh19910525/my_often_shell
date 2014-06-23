@@ -1,5 +1,6 @@
 
-Currert : weibu_tools : Version 2.0.0 !!
+Weibu_tools : Currert Version 2.0.0 !!
+Update Date : 2014-06-24
 
 #########################################################################
 

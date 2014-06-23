@@ -12,8 +12,9 @@ tools_bin=test/$WB_Customer_tools
 my_bin=mybin
 current_path=`pwd`
 core_program=wb_android_tools
-current_date=`date "+%Y-%m-%d-%H-%M-%S"`
-
+current_date=`date "+%Y-%m-%d-%H-%M"`
+new_version_date=`date "+%Y-%m-%d %H:%M"`
+Version_file=$tools_bin/mybin/version.txt
 Publishing_software_name="WB-Customer-tools-${current_date}.tar.gz"
 
 ######### func1 #########
@@ -47,7 +48,9 @@ Program_has_func_list () {
 	cp $core_program $tools_bin/
 	make clean
 
-
+	#sed -i '/wallpaper_04/ c\tttt_weibu' wallpapers.xml
+	sed -i '/Update Date/ c\Update Date : '"${new_version_date}"'' $Version_file
+	#cat $Version_file
 
 	cd test
 	tar cvzf $Publishing_software_name WB-Customer-tools
