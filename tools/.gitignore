@@ -3,5 +3,5 @@ wb_android_tools
 *.zip
 intel-android-4.4-fw/
 test
-WB-Customer-tools.tar.gz
+WB-Customer-tools*
 

@@ -12,7 +12,9 @@ tools_bin=test/$WB_Customer_tools
 my_bin=mybin
 current_path=`pwd`
 core_program=wb_android_tools
+current_date=`date "+%Y-%m-%d-%H-%M-%S"`
 
+Publishing_software_name="WB-Customer-tools-${current_date}.tar.gz"
 
 ######### func1 #########
 color_loop=0
@@ -48,8 +50,8 @@ Program_has_func_list () {
 
 
 	cd test
-	tar cvzf WB-Customer-tools.tar.gz WB-Customer-tools
-	mv WB-Customer-tools.tar.gz ../
+	tar cvzf $Publishing_software_name WB-Customer-tools
+	mv $Publishing_software_name ../
 	cd -	
 
 	git checkout mybin	
