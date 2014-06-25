@@ -15,6 +15,8 @@ int decompression_system_img_gz_for_42(void);
 int mount_system_img_for_ext4(void);
 int chmod_modify_system_dir_777(void);
 void show_version(void);
+void de_42_system_img_gz(void);
+void de_44_system_img(void);
 
 int compress_2_intel_fw(char * fw_name);
 
@@ -23,6 +25,7 @@ char * Customer_tools_FW = "Customer_tools_FW";
 char * intel_tools_set_file = "flash.xml";
 char * Modify_system_img_dir = "Modify_system_img_dir";
 char * System_img_mount_dir_name="modify_system";
+int fw_version_flag = 44;
 
 char * shell_cmd1 = "/usr/local/wh/tools/mybin/check_root.sh ";
 char * shell_cmd2 = "/usr/local/wh/tools/mybin/program_fuc_list.sh ";
@@ -32,11 +35,13 @@ char * shell_cmd5 = "/usr/local/wh/tools/mybin/check_fw_is_weibu.sh ";
 char * shell_cmd6 = "/usr/local/wh/tools/mybin/check_prop_for_encrypt.sh ";
 char * shell_cmd7 = "/usr/local/wh/tools/mybin/show_finish_intel_fw.sh ";
 char * shell_cmd8 = "/usr/local/wh/tools/mybin/show_version.sh ";
+char * my_simg2img = "/usr/local/wh/tools/mybin/simg2img ";
 
 char current_cmd_path[MAXBUFSIZE];
 char tmp_cmd[MAXBUFSIZE];
 
 char * intel_4_2_system_name="system.img.gz";
+char * intel_4_4_system_name="system.img";
 char * before_modify_intel_4_2_system_img_gz_name="before_system.img.gz";
 char * before_modify_intel_4_2_system_img_name="before_system.img";
 
@@ -84,6 +89,17 @@ int main(int argc, char **argv){
 		flag = 'C';
 	}
 
+	if(strncmp(argv[2], "4.2", 3) == 0){
+		fw_version_flag = 42;
+	}else if(strncmp(argv[2], "4-2", 3) == 0){
+		fw_version_flag = 42;
+	}else{
+		fw_version_flag = 44;
+    }
+
+
+
+
 	switch(flag){
 		case 'D':
 		case 'd':
@@ -123,7 +139,6 @@ int main(int argc, char **argv){
 				goto check_root_error1;
 			}
 
-			//wanghai
 			//7.chmod 777 -R $Intel_android_top/$Tmp_Dir/m_system/ 修改 挂载点的 权限为 777
 			error = chmod_modify_system_dir_777();
 			if(error != 0)
@@ -299,8 +314,27 @@ int decompression_system_img_gz_for_42(void){
 	}
 #endif
 
-
 	//5.4 解压 4.2 system.img.gz
+    if(fw_version_flag == 42){
+        //4.2: gunzip -c Customer_tools_FW/system.img.gz > Modify_system_img_dir/before_system.img
+        de_42_system_img_gz();
+    }else if(fw_version_flag == 44){
+        //4.4
+        de_44_system_img();
+    }
+	error = excu_no_para_shell_get_return_int(tmp_cmd);
+	if(error != 0)
+	{
+		printf("%d : error: %d\n excu : [%s] failed!!\n\n", __LINE__, error, tmp_cmd);
+		return 1;
+	}
+	
+	return error;
+}
+
+//4.2: gunzip -c Customer_tools_FW/system.img.gz > Modify_system_img_dir/before_system.img
+void de_42_system_img_gz(void){
+
 	memset(tmp_cmd, '\0', sizeof(tmp_cmd));
 	strcat(tmp_cmd, "gunzip -c ");
 	strcat(tmp_cmd, Customer_tools_FW);
@@ -311,15 +345,25 @@ int decompression_system_img_gz_for_42(void){
 	strcat(tmp_cmd, "/");
 	strcat(tmp_cmd, before_modify_intel_4_2_system_img_name);
 //	printf("%d : cmd = %s\n", __LINE__, tmp_cmd);
-	error = excu_no_para_shell_get_return_int(tmp_cmd);
-	if(error != 0)
-	{
-		printf("%d : error: %d\n excu : [%s] failed!!\n\n", __LINE__, error, tmp_cmd);
-		return 1;
-	}
-	
-	return error;
+
 }
+
+//44: ./simg2img system.img system.img.ext4
+void de_44_system_img(void){
+
+	memset(tmp_cmd, '\0', sizeof(tmp_cmd));
+	strcat(tmp_cmd, my_simg2img);
+	strcat(tmp_cmd, Customer_tools_FW);
+	strcat(tmp_cmd, "/");
+	strcat(tmp_cmd, intel_4_4_system_name);
+	strcat(tmp_cmd, "  ");
+	strcat(tmp_cmd, Modify_system_img_dir);
+	strcat(tmp_cmd, "/");
+	strcat(tmp_cmd, before_modify_intel_4_2_system_img_name);
+//	printf("%d : cmd = %s\n", __LINE__, tmp_cmd);
+
+}
+
 
 //3.解压 intel 升级固件;
 int decompression_intel_upgrade_fw(char * d_file){
