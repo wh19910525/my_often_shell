@@ -149,10 +149,10 @@ if [ -f $read_prop_file ];then
 			echo 
 			echo -en "\033[0m"
 
-            echo "$intel_tools_bin_path/mkuserimg.sh -s $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648 $intel_tools_bin_path/file_contexts > /dev/null"
+            #echo "$intel_tools_bin_path/mkuserimg.sh -s $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648 $intel_tools_bin_path/file_contexts > /dev/null"
             $intel_tools_bin_path/mkuserimg.sh -s $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648 $intel_tools_bin_path/file_contexts > /dev/null
 			
-            echo cp $new_system_img_path $after_modify_intel_fw_path
+            #echo cp $new_system_img_path $after_modify_intel_fw_path
             cp $new_system_img_path $after_modify_intel_fw_path
 
             #sign intel kernel logo

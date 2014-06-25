@@ -15,7 +15,7 @@ if [ $Step2 -eq 1 ];then
 
 	echo -en "\033[32m"
 	
-    if [ "$(id -u)" != "0" ]; then
+    if [ "$(id -u)" == "0" ]; then
 
         for read_my_shell_bin_path in `cat $GLOBLE_ENV_FILE`
         do
@@ -73,6 +73,8 @@ if [ $Step2 -eq 1 ];then
     else
     
         echo -en "\033[33m"
+        echo
+        echo
         echo "Please Switch to the root user!, then Execute ./install.sh"
         echo
         echo
