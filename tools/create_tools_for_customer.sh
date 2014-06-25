@@ -50,7 +50,22 @@ Program_has_func_list () {
 
 	#sed -i '/wallpaper_04/ c\tttt_weibu' wallpapers.xml
 	sed -i '/Update Date/ c\Update Date : '"${new_version_date}"'' $Version_file
-	#cat $Version_file
+    
+    #add sign files
+	for i in `ls sign`
+	do
+		if [  x$i == xsign.sh ];then
+			gzexe sign/$i	
+		else
+			#echo "skip version.txt"
+            wanghai_no_use=1
+		fi
+	done
+
+    cp sign $tools_bin -rf
+	rm sign/*~
+	git checkout sign
+
 
 	cd test
 	tar cvzf $Publishing_software_name WB-Customer-tools

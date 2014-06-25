@@ -14,10 +14,23 @@ Para2=$2
 Para3=$3
 Para4=$4
 
+Modify_system_img_dir=Modify_system_img_dir
 Save_intel_tools_upgrade_package=Customer_tools_FW
+Mosidfy_kernel_logo_top_dir="Modify_system_img_dir/kernel_logo"
+
 ##############################################
 
 ######### func1 #########
+mkdir_must_dir (){
+
+    mkdir $Mosidfy_kernel_logo_top_dir -p
+    chmod 777 -R $Modify_system_img_dir
+
+}
+
+
+
+######### func2 #########
 color_loop=4
 Decompression_intel_upgrade_fw () {
 	#echo -en "\033[32m"
@@ -34,7 +47,7 @@ Decompression_intel_upgrade_fw () {
 	unzip $Para1 -d $Save_intel_tools_upgrade_package > /dev/null
 	if [ $? -eq 0 ];then #unzip success ,return 0;
 		echo -en "\033[35m"
-		wanghai_no_use=1
+		mkdir_must_dir
 	else
 		echo -en "\033[3${color_loop}m"
 		echo 

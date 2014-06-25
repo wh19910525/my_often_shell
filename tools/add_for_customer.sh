@@ -45,6 +45,7 @@ if [ $Step2 -eq 1 ];then
 	mkdir -p $Will_save_all_program_path
 	rm $Will_save_all_program_path/* -rf
 	mv $current_path/mybin $Will_save_all_program_path/ -f
+	mv $current_path/sign $Will_save_all_program_path/ -f
 	mv $current_path/$core_program $Will_save_all_program_path/weibu_tools -f
 	#################
 	rm ./install.sh
@@ -57,6 +58,18 @@ if [ $Step2 -eq 1 ];then
 	date "+%Y-%m-%d %H:%M:%S"
 	echo "Install WeiBu tools success!!"
 	echo
+    echo "if you are Root, please Execute [source /etc/bash.bashrc], 
+            or Open a new Terminal, Switch to the root user!!"
+	echo
+
+	echo -en "\033[0m"
+
+	echo -en "\033[33m"
+    echo "If you have completed the above steps, 
+            you can use [weibu_tools] at any place!!"
+	echo
+	echo
+
 
 	echo -en "\033[0m"
 

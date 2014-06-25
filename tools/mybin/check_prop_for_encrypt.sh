@@ -14,6 +14,11 @@ Para2=$2
 Para3=$3
 Para4=$4
 
+intel_4_2_kernel_logo_name="4-2"
+intel_4_4_kernel_logo_name="4-4"
+Use_intel_android_version=
+
+Mosidfy_kernel_logo_top_dir="$Para1/Modify_system_img_dir/kernel_logo"
 Modify_System_img_Top_dir="$Para1/Modify_system_img_dir/modify_system/"
 read_prop_file=$Modify_System_img_Top_dir/build.prop
 check_info="ro.zgj.no.use=whtool"
@@ -32,11 +37,49 @@ tmp_system_img_gz=$after_modify_intel_fw_path/new_system.img.gz
 old_system_img_gz=$after_modify_intel_fw_path/system.img.gz
 new_system_img_gz=$after_modify_intel_fw_path/system.img.gz
 
+weibu_tools_install_path="/usr/local/wh/tools"
+intel_sign_logo_path=$weibu_tools_install_path/sign
+
 #############################################
 
 ######### func1 #########
 color_loop=5
 prop_loop=1
+
+convert_intel_kernel_logo(){
+
+	echo -en "\033[36m"
+            # here panduan logo is 4.2 or 4.4
+            for i in `ls $Mosidfy_kernel_logo_top_dir`
+            do
+
+                #echo cp $Mosidfy_kernel_logo_top_dir/$i $intel_sign_logo_path/logo.bmp
+                cp $Mosidfy_kernel_logo_top_dir/$i $intel_sign_logo_path/logo.bmp
+                if [[ "$i" =~ $intel_4_4_kernel_logo_name ]];then
+                    Use_intel_android_version=$intel_4_4_kernel_logo_name
+                else
+                    Use_intel_android_version=$intel_4_2_kernel_logo_name
+                fi
+
+            done
+            
+            $intel_sign_logo_path/sign.sh > /dev/null
+           
+            if [ $Use_intel_android_version = $intel_4_4_kernel_logo_name ];then
+                #4.4
+                #echo cp $intel_sign_logo_path/logo.img $after_modify_intel_fw_path/splash.img
+                cp $intel_sign_logo_path/logo.img $after_modify_intel_fw_path/splash.img
+            else
+                #4.2
+                #echo cp $intel_sign_logo_path/logo.img $after_modify_intel_fw_path/logo.img
+                cp $intel_sign_logo_path/logo.img $after_modify_intel_fw_path/logo.img
+            fi
+
+
+	echo -en "\033[0m"
+
+}
+
 
 Check_fw_is_weibu () {
 
@@ -64,6 +107,9 @@ if [ -f $read_prop_file ];then
 			
             #echo "cp $new_system_img_gz_path $new_system_img_gz"
             cp $new_system_img_gz_path $new_system_img_gz
+
+            #sign intel kernel logo
+            convert_intel_kernel_logo
 
 			umount $Modify_System_img_Top_dir -l
 
