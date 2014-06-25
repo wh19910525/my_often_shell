@@ -40,6 +40,7 @@ new_system_img_gz=$after_modify_intel_fw_path/system.img.gz
 
 weibu_tools_install_path="/usr/local/wh/tools"
 intel_sign_logo_path=$weibu_tools_install_path/sign
+intel_tools_bin_path=$weibu_tools_install_path/mybin
 
 #############################################
 
@@ -119,8 +120,8 @@ if [ -f $read_prop_file ];then
 			echo 
 			echo -en "\033[0m"
 
-            #echo "/usr/local/wh/tools/mybin/mkuserimg.sh $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648"
-            /usr/local/wh/tools/mybin/mkuserimg.sh $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648 > /dev/null
+            #echo "$intel_tools_bin_path/mkuserimg.sh $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648"
+            $intel_tools_bin_path/mkuserimg.sh $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648 > /dev/null
 
 			#echo "gzip < $new_system_img_path > $new_system_img_gz_path"
 			gzip < $new_system_img_path > $new_system_img_gz_path
@@ -137,6 +138,7 @@ if [ -f $read_prop_file ];then
 			echo 
 
 			exit 0
+
 		elif [[ "$read_prop" =~ $check_4_4_info ]];then
 
             echo -en "\033[36m"
@@ -147,14 +149,11 @@ if [ -f $read_prop_file ];then
 			echo 
 			echo -en "\033[0m"
 
-            #echo "/usr/local/wh/tools/mybin/mkuserimg.sh $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648"
-            /usr/local/wh/tools/mybin/mkuserimg.sh $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648 > /dev/null
-
-			#echo "gzip < $new_system_img_path > $new_system_img_gz_path"
-			gzip < $new_system_img_path > $new_system_img_gz_path
+            echo "$intel_tools_bin_path/mkuserimg.sh -s $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648 $intel_tools_bin_path/file_contexts > /dev/null"
+            $intel_tools_bin_path/mkuserimg.sh -s $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648 $intel_tools_bin_path/file_contexts > /dev/null
 			
-            #echo "cp $new_system_img_gz_path $new_system_img_gz"
-            cp $new_system_img_gz_path $new_system_img_gz
+            echo cp $new_system_img_path $after_modify_intel_fw_path
+            cp $new_system_img_path $after_modify_intel_fw_path
 
             #sign intel kernel logo
             convert_intel_4_4_kernel_logo
