@@ -41,6 +41,7 @@ wb_repo.sh [options]
         -- push
         -- clean
 	-- manifest
+	-- sync
 
 "
     echo -en "\033[0m"
@@ -253,6 +254,75 @@ manifest (){
 	fi	
 }
 
+####### funtion10 ########
+sync_m_manifest (){
+			
+	if [ -f $1 ];then
+
+		for tmp in `cat $current_path/$1`
+		do
+#			echo $tmp
+			left_string_name=${tmp#*:}
+
+			has_git_dir_name=${tmp%%:*} 
+			has_git_dir_branch_name=${left_string_name%%:*}
+			has_git_dir_branch_commit=${tmp##*:}
+
+    usage_color "$globle_loop : [$has_git_dir_name:$has_git_dir_branch_name:$has_git_dir_branch_commit]"
+
+			if [ $has_git_dir_name != android_top_dir ];then
+
+				cd $current_path/$has_git_dir_name > /dev/null
+				
+				tmp_current_branch=`git branch -a | sed -n '/'*'/p'`
+				current_git_branch=${tmp_current_branch##*\ }		
+
+				echo git reset HEAD
+				echo git checkout .
+				echo git pull
+
+				if [ x$current_git_branch = x$has_git_dir_branch_name ];then
+					echo git reset --hard $has_git_dir_branch_commit
+					echo git clean -df
+				else
+					echo git checkout -t remotes/origin/$has_git_dir_branch_name
+					echo git reset --hard $has_git_dir_branch_commit
+					echo git clean -df
+				fi
+
+				echo 
+				cd - > /dev/null
+
+				((globle_loop++))
+			else
+
+				tmp_current_branch=`git branch -a | sed -n '/'*'/p'`
+				current_git_branch=${tmp_current_branch##*\ }		
+
+				echo git reset HEAD
+				echo git checkout .
+				echo git pull
+
+				if [ x$current_git_branch = x$has_git_dir_branch_name ];then
+					echo git reset --hard $has_git_dir_branch_commit
+					echo git clean -df
+				else
+					echo git checkout -t remotes/origin/$has_git_dir_branch_name
+					echo git reset --hard $has_git_dir_branch_commit
+					echo git clean -df
+				fi
+
+				echo 
+
+			fi
+		done
+
+	else
+		echo "file : $1 no exist!!"	
+	fi
+
+}
+
 ############# main func ##############
 if [ $# -ne 0 ]; then
 
@@ -391,6 +461,13 @@ if [ $# -ne 0 ]; then
         elif [ x$para1 = x"manifest" ]; then
 
 		manifest
+#wanghai
+        ###### sync_m_manifest ######
+        elif [ x$para1 = x"sync" ]; then
+
+            if [ $# -eq 3 -a x$para2 = x"-m" ];then
+		sync_m_manifest $para3
+	    fi
 
         else
             echo
