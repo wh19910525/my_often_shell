@@ -41,6 +41,10 @@ new_system_img_gz=$after_modify_intel_fw_path/system.img.gz
 weibu_tools_install_path="/usr/local/wh/tools"
 intel_sign_logo_path=$weibu_tools_install_path/sign
 intel_tools_bin_path=$weibu_tools_install_path/mybin
+intel_tools_config_path=$weibu_tools_install_path/mybin/config
+
+#def system.img 2G
+System_img_size=2147483648
 
 #############################################
 
@@ -101,6 +105,24 @@ convert_intel_4_4_kernel_logo(){
 
 }
 
+get_system_img_ext4_size(){
+
+            
+            echo "get system.img size11 ------------------ "
+            $intel_tools_bin_path/get_system_img_size.sh $Para1
+            echo "get system.img size22 ------------------ "
+            
+            for tmp in `cat $intel_tools_config_path`
+            do
+                if [[ "$tmp" =~ "real_ext4_system_img_size" ]];then
+                    tmp=${tmp#*=}
+                    Real_system_img_ext4_size=$tmp 
+                    echo Real_system_img_ext4_size=$Real_system_img_ext4_size
+                fi  
+
+            done
+
+}
 
 Check_fw_is_weibu () {
 
@@ -119,9 +141,13 @@ if [ -f $read_prop_file ];then
 			echo 
 			echo 
 			echo -en "\033[0m"
+#wanghai
 
-            #echo "$intel_tools_bin_path/mkuserimg.sh $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648"
-            $intel_tools_bin_path/mkuserimg.sh $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648 > /dev/null
+            get_system_img_ext4_size
+
+                #echo "$intel_tools_bin_path/mkuserimg.sh $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648"
+            echo "$intel_tools_bin_path/mkuserimg.sh $Modify_System_img_Top_dir $new_system_img_path ext4 system $Real_system_img_ext4_size > /dev/null"
+            $intel_tools_bin_path/mkuserimg.sh $Modify_System_img_Top_dir $new_system_img_path ext4 system $Real_system_img_ext4_size > /dev/null
 
 			#echo "gzip < $new_system_img_path > $new_system_img_gz_path"
 			gzip < $new_system_img_path > $new_system_img_gz_path
@@ -149,8 +175,10 @@ if [ -f $read_prop_file ];then
 			echo 
 			echo -en "\033[0m"
 
+            get_system_img_ext4_size
+
             #echo "$intel_tools_bin_path/mkuserimg.sh -s $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648 $intel_tools_bin_path/file_contexts > /dev/null"
-            $intel_tools_bin_path/mkuserimg.sh -s $Modify_System_img_Top_dir $new_system_img_path ext4 system 2147483648 $intel_tools_bin_path/file_contexts > /dev/null
+            $intel_tools_bin_path/mkuserimg.sh -s $Modify_System_img_Top_dir $new_system_img_path ext4 system $Real_system_img_ext4_size $intel_tools_bin_path/file_contexts > /dev/null
 			
             #echo cp $new_system_img_path $after_modify_intel_fw_path
             cp $new_system_img_path $after_modify_intel_fw_path

@@ -27,8 +27,8 @@ Program_has_func_list () {
 
 	for i in `ls mybin`
 	do
-		if [  x$i == xversion.txt ];then
-			echo "skip version.txt"
+		if [  x$i == xversion.txt -o x$i == xconfig ];then
+			echo "skip version.txt or config"
 		else
 			gzexe mybin/$i	
 		fi
