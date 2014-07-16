@@ -28,9 +28,9 @@ current_data=`date "+%Y_%m_%d_%H_%M_%S"`
 
 #############################
 
-android_top_dir=android_4.4_source_code_$current_data
+android_top_dir=android_baytrain_4.4_source_code_$current_data
 git_server_addr=192.168.2.5
-on_git_server_android_source_code_name=intel_clovertral_p_android_4.4
+on_git_server_android_source_code_name=intel_baytrain_android_4.4
 
 
 Step1=1
@@ -82,12 +82,4 @@ if [ $Step1 -eq 1 ]; then
 
 fi
 
-
-Step2=0
-if [ $Step2 -eq 1 ]; then
-
-    pwd
-    ./auto-compile-android-src-code.sh
-
-fi
 
