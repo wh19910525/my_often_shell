@@ -346,7 +346,8 @@ if [ $# -ne 0 ]; then
 
             for tmp in `ls` 
             do
-                if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
+                if [ -e $tmp/.git ]; then
+                #if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
                     git_branch $tmp
                 fi        
 
@@ -362,7 +363,8 @@ if [ $# -ne 0 ]; then
 
                 for tmp in `ls` 
                 do
-                    if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
+                    #if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
+                    if [ -e $tmp/.git ]; then
                         git_checkout $tmp
                     fi        
 
@@ -375,7 +377,8 @@ if [ $# -ne 0 ]; then
 
                 for tmp in `ls` 
                 do
-                    if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
+                    #if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
+                    if [ -e $tmp/.git ]; then
                         git_checkout $tmp $para2 
                     fi        
 
@@ -388,7 +391,8 @@ if [ $# -ne 0 ]; then
 
                 for tmp in `ls` 
                 do
-                    if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
+                    #if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
+                    if [ -e $tmp/.git ]; then
                         git_checkout $tmp $para2 $para3
                     fi        
 
