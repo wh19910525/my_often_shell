@@ -13,8 +13,7 @@ loop=1
 globle_loop=1
 current_path=`pwd`
 current_data=`date "+%Y-%m-%d_%H-%M"`
-manifest_name=manifest_$current_data
-manifest_file=$current_path/$manifest_name
+manifest_file=$current_path/manifest_$current_data
 dir_has_git=".git/config"
 
 #############################
@@ -41,50 +40,11 @@ wb_repo.sh [options]
         -- pull
         -- push
         -- clean
-        -- manifest
-        -- sync
-        -- help
+	-- manifest
+	-- sync
 
 "
     echo -en "\033[0m"
-}
-
-usage_help_cmd (){
-
-    echo -en "\033[32m
-
-options:
-        -- status
-            wb_repo.sh status
-
-        -- checkout
-            wb_repo.sh checkout -t remotes-branch
-            wb_repo.sh checkout -b location-branch
-
-        -- branch
-            wb_repo.sh branch
-            wb_repo.sh branch -a
-
-        -- pull
-            wb_repo.sh pull
-
-        -- push
-            wb_repo.sh push
-            wb_repo.sh push origin location:remotes
-
-        -- clean
-            wb_repo.sh clean -df
-
-        -- manifest
-            wb_repo.sh manifest 
-            wb_repo.sh manifest -o file-name
-
-        -- sync
-            wb_repo.sh sync -m manifest-file
-
-"
-    echo -en "\033[0m"
-
 }
 
 ####### funtion3 ########
@@ -266,7 +226,6 @@ git_clean (){
 
 ####### funtion9 ########
 manifest (){
-
 	for tmp in `ls`
 	do
 		if [ -f $current_path/$tmp/$dir_has_git ];then
@@ -282,6 +241,8 @@ manifest (){
 
 		fi
 
+
+
 	done
 
 	if [ -f $current_path/$dir_has_git ];then
@@ -289,26 +250,13 @@ manifest (){
 		current_git_branch=${tmp_current_branch##*\ }		
 		first_commit_value=`git log . | head -n 1`
 		echo "android_top_dir:$current_git_branch:${first_commit_value#* }" >> $manifest_file	
-	fi	
 			
-	if [ $# -ne 0 ];then
-        mv $manifest_file $1
-        manifest_file=$1
-    fi
-
-
-    echo 
-    usage_color "The manifest file is [$manifest_file] !!"	
-    echo 
+	fi	
 }
 
 ####### funtion10 ########
 sync_m_manifest (){
-
-        echo 
-    	usage_color "manifest_file=[$1]"	
-        echo 
-    		
+    echo "manifest_file=[$1]"			
 	if [ -f $1 ];then
 
 		for tmp in `cat $current_path/$1`
@@ -345,12 +293,7 @@ sync_m_manifest (){
 					echo git checkout -t remotes/origin/$has_git_dir_branch_name
 					echo git reset --hard $has_git_dir_branch_commit
 					echo git clean -df
-					git checkout -t remotes/origin/$has_git_dir_branch_name >> /dev/null
-					if [ $? -ne 0 ];then
-			                	echo "checkout new branch!!"
-			                	git checkout  $has_git_dir_branch_name
-			                fi
-					
+					git checkout -t remotes/origin/$has_git_dir_branch_name
 					git reset --hard $has_git_dir_branch_commit
 					git clean -df
 				fi
@@ -380,12 +323,7 @@ sync_m_manifest (){
 					echo git checkout -t remotes/origin/$has_git_dir_branch_name
 					echo git reset --hard $has_git_dir_branch_commit
 					echo git clean -df
-					git checkout -t remotes/origin/$has_git_dir_branch_name >> /dev/null
-					if [ $? -ne 0 ];then
-			                	echo "checkout new branch!!"
-			                	git checkout  $has_git_dir_branch_name
-			                fi
-					
+					git checkout -t remotes/origin/$has_git_dir_branch_name
 					git reset --hard $has_git_dir_branch_commit
 					git clean -df
 				fi
@@ -542,12 +480,8 @@ if [ $# -ne 0 ]; then
         ###### manifest ######
         elif [ x$para1 = x"manifest" ]; then
 
-            if [ $# -eq 3 -a x$para2 = x"-o" ];then
-                manifest $para3
-            else
-                manifest
-            fi
-
+            manifest
+#wanghai
         ###### sync_m_manifest ######
         elif [ x$para1 = x"sync" ]; then
 
@@ -555,9 +489,6 @@ if [ $# -ne 0 ]; then
                 sync_m_manifest $para3
             fi
 
-        elif [ x$para1 = x"help" ]; then
-            usage_help_cmd
-            
         else
             echo
             usage_color "No [$para1] cmd!!"
