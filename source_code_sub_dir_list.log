@@ -17,6 +17,7 @@ ifwi_clvp_kk_w8.git
 libcore.git
 libnativehelper.git
 linux.git
+manifest.git
 ndk.git
 packages.git
 pdk.git
