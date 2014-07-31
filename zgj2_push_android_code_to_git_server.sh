@@ -8,7 +8,7 @@ echo "current_source_code_top_dir=$current_source_code_top_dir"
 
 #############################
 
-git_admin_config=gitosis.conf
+git_admin_config=003_clovertrain44.txt
 #git_admin_config=test_git_admin_config.txt
 android_top_dir="intel_clovertral_p_android_4.4"
 write_git_source_codei_list="wb_git_gly@pbserver wanghai_157 wanghaifei legang ShuaiNanXiang ChenYinJun DingYuBin LeGang_r yuanhaiping xinkun liuxingde qichaomin zhangjuyuan zjk zhaojingrong laiyuanzhao"
