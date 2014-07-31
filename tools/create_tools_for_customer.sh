@@ -66,6 +66,10 @@ Program_has_func_list () {
 	rm sign/*~
 	git checkout sign
 
+	gzexe kernel_logo_wb.sh
+    cp kernel_logo_wb.sh $tools_bin -rf
+	git checkout kernel_logo_wb.sh
+    rm kernel_logo_wb.sh~
 
 	cd test
 	tar cvzf $Publishing_software_name WB-Customer-tools

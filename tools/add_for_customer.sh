@@ -6,6 +6,7 @@
 
 current_path=`pwd`
 core_program=wb_android_tools
+kernel_logo_bin=kernel_logo_wb.sh
 Will_save_all_program_path=/usr/local/wh/tools
 GLOBLE_ENV_FILE="/etc/bash.bashrc"
 has_add_globle_env=0
@@ -48,6 +49,7 @@ if [ $Step2 -eq 1 ];then
         mv $current_path/mybin $Will_save_all_program_path/ -f
         mv $current_path/sign $Will_save_all_program_path/ -f
         mv $current_path/$core_program $Will_save_all_program_path/weibu_tools -f
+        mv $current_path/$kernel_logo_bin $Will_save_all_program_path/ -f
         #################
         rm ./install.sh
         #################
