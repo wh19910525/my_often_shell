@@ -11,14 +11,17 @@ echo "current_source_code_top_dir=$current_source_code_top_dir"
 #git_admin_config=gitosis.conf
 git_admin_config="005_bytrain_code_4_4_4_user.txt"
 android_top_dir="intel_baytrain_android_4_4_4"
-write_git_source_codei_list="wb_git_gly@pbserver wanghai_157 wanghaifei legang ShuaiNanXiang ChenYinJun DingYuBin LeGang_r yuanhaiping xinkun liuxingde qichaomin zhangjuyuan zjk zhaojingrong laiyuanzhao"
+write_git_source_codei_list="wb_git_gly@pbserver wanghai_157 wanghaifei legang ShuaiNanXiang ChenYinJun DingYuBin LeGang_r yuanhaiping xinkun liuxingde qichaomin zhangjuyuan zjk zhaojingrong laiyuanzhao liuwei"
 read_git_source_code_list="tanglei"
 
 
 Step1=1
 if [ $Step1 -eq 1 ];then
 
-rm $git_admin_config
+ 
+if [ -e $git_admin_config ];then
+    rm $git_admin_config
+fi
 
     echo "####################################################" >> $git_admin_config
     echo "###### $android_top_dir  ######" >> $git_admin_config
