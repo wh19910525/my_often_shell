@@ -11,7 +11,7 @@ echo "current_source_code_top_dir=$current_source_code_top_dir"
 #git_admin_config=gitosis.conf
 git_admin_config="004_bytrain_code44_user.txt"
 android_top_dir="intel_baytrain_android_4.4"
-write_git_source_codei_list="wb_git_gly@pbserver wanghai_157 wanghaifei legang ShuaiNanXiang ChenYinJun DingYuBin LeGang_r yuanhaiping xinkun liuxingde qichaomin zhangjuyuan zjk zhaojingrong laiyuanzhao liuwei"
+write_git_source_codei_list="wb_git_gly@pbserver wanghai_157 wanghaifei legang ShuaiNanXiang ChenYinJun DingYuBin LeGang_r yuanhaiping xinkun liuxingde qichaomin zhangjuyuan zjk zhaojingrong laiyuanzhao liuwei huangsheng panyiwen"
 read_git_source_code_list="tanglei"
 
 Step1=1
