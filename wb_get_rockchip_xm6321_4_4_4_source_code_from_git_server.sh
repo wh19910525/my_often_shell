@@ -10,7 +10,7 @@ android_top_dir=rockchip_xm6321_4_4_4_$current_data
 git_server_addr=192.168.2.5
 on_git_server_android_source_code_name=rockchip_xm6321_4_4_4
 
-get_source_code_sub_dir_list_path=`which rockchip_xm6321_4_4_4_git_list`
+get_source_code_sub_dir_list_path=`which android_rockchip_xm6321_4_4_4_git_list`
 echo get_source_code_sub_dir_list_path=$get_source_code_sub_dir_list_path
 current_path=`pwd`
 
