@@ -484,13 +484,19 @@ if [ $# -ne 0 ]; then
 
             for tmp in `ls` 
             do
-                if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
-                    git_pull $tmp
-                fi        
+                #echo ls $tmp/$dir_has_git
+                if [ -e $tmp/$dir_has_git ];then
+                    if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
+                        git_pull $tmp
+                    fi        
+                fi
 
             done
 
-            git_pull
+            #echo ls $tmp/$dir_has_git
+            if [ -e $dir_has_git ];then
+                git_pull
+            fi
 
         ###### git push ######
         elif [ x$para1 = x"push" ]; then
