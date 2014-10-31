@@ -404,7 +404,7 @@ sync_m_manifest (){
 ############# main func ##############
 if [ $# -ne 0 ]; then
 
-    if [ -d frameworks ]; then
+    if [ -d frameworks -o -d linux ]; then
 
         ###### git status ######
         if [ x$para1 = x"status" ];then
