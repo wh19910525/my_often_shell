@@ -64,13 +64,13 @@ Program_has_func_list () {
     fi  
 
     echo -en "\033[3${color_loop}m"
-    echo    "***********************************************************************************";
-    echo    "# 使用方法:                                                                       #";
-    echo    "#     功能1 : ./android_tools.sh -d system.img --> 解压 system.img [$modify_system_img]   #";
+    echo    "******************************************************************************************";
+    echo    "# 使用方法:                                                                              #";
+    echo    "#     功能1 : ./android_tools.sh -d system.img --> 解压 system.img [$modify_system_img]  #";
     echo    "#     功能2 : ./android_tools.sh -c        --> 创建 [save_new_system_img/new_system.img] #";
     echo    "#     功能3 : ./android_tools.sh -clean        --> 清空 当前目录                         #";
-    echo    "#                                                                                 #";
-    echo    "***********************************************************************************";
+    echo    "#                                                                                        #";
+    echo    "******************************************************************************************";
     echo
 
 
@@ -156,6 +156,11 @@ umount_modify_system_img(){
 
 }
 
+show_version(){
+    echo -en "\033[32m"
+    cat x86_bin/version_info.txt
+    echo -en "\033[0m"
+}
 
 if [ $# -eq 0 ];then 
     Program_has_func_list
@@ -166,10 +171,14 @@ elif [ $Para1 == '-c' ];then
     Compressed_modify_system_img
 elif [ $Para1 == '-clean' ];then
     umount_modify_system_img
+elif [ $Para1 == '-v' ];then
+    show_version
 else
+    echo -en "\033[32m"
     echo
     echo "Unknow $Para1 !!"
     echo
+    echo -en "\033[0m"
 
     Program_has_func_list
 fi
