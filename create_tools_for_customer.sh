@@ -21,8 +21,19 @@ color_loop=0
 Program_has_func_list () {
 
 	mkdir $WB_Customer_tools -p
+    #add x86_bin/
 	cp $my_bin $WB_Customer_tools -rf
+
+    #Confusion shell
+    gzexe $main_bin
+    #add android_tools.sh
     cp $main_bin $WB_Customer_tools -rf
+    rm $main_bin~
+    git checkout $main_bin
+
+
+
+
 	tar cvzf $Publishing_software_name $WB_Customer_tools
     rm $WB_Customer_tools -rf
 

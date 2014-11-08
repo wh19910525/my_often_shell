@@ -35,11 +35,12 @@ old_system_img_bak=old_system_img_bak
 save_new_system_img=save_new_system_img
 modify_system_img=modify_system_img
 
-
-mkdir $modify_system_img -p
-mkdir $old_system_img_bak -p
-mkdir $save_new_system_img -p
-mkdir $tmp_dir -p
+create_must_dir(){
+    mkdir $modify_system_img -p
+    mkdir $old_system_img_bak -p
+    mkdir $save_new_system_img -p
+    mkdir $tmp_dir -p
+}
 
 
 ######### func1 #########
@@ -66,7 +67,7 @@ Program_has_func_list () {
     echo -en "\033[3${color_loop}m"
     echo    "******************************************************************************************";
     echo    "# 使用方法:                                                                              #";
-    echo    "#     功能1 : ./android_tools.sh -d system.img --> 解压 system.img [$modify_system_img]  #";
+    echo    "#     功能1 : ./android_tools.sh -d system.img --> 解压 system.img [$modify_system_img]   #";
     echo    "#     功能2 : ./android_tools.sh -c        --> 创建 [save_new_system_img/new_system.img] #";
     echo    "#     功能3 : ./android_tools.sh -clean        --> 清空 当前目录                         #";
     echo    "#                                                                                        #";
@@ -99,6 +100,8 @@ Unzip_system_img(){
         exit
     fi
 
+    create_must_dir
+
     #echo "$baytrain_444_bin_path/simg2img $Para2 $tmp_dir/system.img.ext4"
     $baytrain_444_bin_path/simg2img $Para2 $tmp_dir/system.img.ext4
 
@@ -109,7 +112,7 @@ Unzip_system_img(){
 
     echo -en "\033[35m"
     echo
-    echo "Unzip $Para2 finished, you can modify $modify_system_img !!"
+    echo "Unzip $Para2 finished, you can modify something in [$modify_system_img] dir!!"
     echo
     echo -en "\033[0m"
 
@@ -119,7 +122,8 @@ Unzip_system_img(){
 
 ######### func3 #########
 Compressed_modify_system_img(){
-
+    create_must_dir
+    
     echo -en "\033[32m"
     echo "Compressed $modify_system_img to new_system.img"
     echo -en "\033[0m"
