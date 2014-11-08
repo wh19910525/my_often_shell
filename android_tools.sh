@@ -110,13 +110,14 @@ Unzip_system_img(){
     echo -en "\033[0m"
     sudo chmod 777 -R $modify_system_img/
 
+    cp $Para2 $old_system_img_bak/
+
     echo -en "\033[35m"
     echo
     echo "Unzip $Para2 finished, you can modify something in [$modify_system_img] dir!!"
     echo
     echo -en "\033[0m"
-
-    cp $Para2 $old_system_img_bak/
+   
 
 }
 
@@ -128,6 +129,15 @@ Compressed_modify_system_img(){
     echo "Compressed $modify_system_img to new_system.img"
     echo -en "\033[0m"
     $baytrain_444_bin_path/mkuserimg.sh -s $modify_system_img/ save_new_system_img/new_system.img ext4 system 1073741824 $baytrain_444_bin_path/file_contexts
+    if [ $? -ne 0 ]; then
+        echo -en "\033[33m"
+        echo 
+        echo "Compresse system.img error !!"
+        echo 
+        echo -en "\033[0m"
+        
+        exit 4
+    fi
 
     echo -en "\033[33m"
     echo 

@@ -53,9 +53,15 @@ if [ -n "$FC" ]; then
     FCOPT="-S $FC"
 fi
 
-MAKE_EXT4FS_CMD="make_ext4fs $ENABLE_SPARSE_IMAGE $FCOPT -l $SIZE -a $MOUNT_POINT $OUTPUT_FILE $SRC_DIR"
+#echo cyj_11_08=`pwd`
+Frank_make_ext4fs_path="./x86_bin/baytrain_444/make_ext4fs"
+MAKE_EXT4FS_CMD="$Frank_make_ext4fs_path  $ENABLE_SPARSE_IMAGE $FCOPT -l $SIZE -a $MOUNT_POINT $OUTPUT_FILE $SRC_DIR"
+#MAKE_EXT4FS_CMD="make_ext4fs $ENABLE_SPARSE_IMAGE $FCOPT -l $SIZE -a $MOUNT_POINT $OUTPUT_FILE $SRC_DIR"
 echo $MAKE_EXT4FS_CMD
 $MAKE_EXT4FS_CMD
 if [ $? -ne 0 ]; then
-  exit 4
+    exit 4
+else
+    exit 0
 fi
+
