@@ -12,7 +12,7 @@ echo "current_source_code_top_dir=$current_source_code_top_dir"
 git_admin_config="005_bytrain_code_4_4_4_user.txt"
 android_top_dir="intel_baytrain_android_4_4_4"
 write_git_source_codei_list="wb_git_gly@pbserver wanghai_157 wanghaifei legang ShuaiNanXiang ChenYinJun DingYuBin LeGang_r yuanhaiping xinkun liuxingde qichaomin zhangjuyuan zjk zhaojingrong laiyuanzhao liuwei huangsheng panyiwen hulin huangjiyu"
-read_git_source_code_list="tanglei"
+read_git_source_code_list="tanglei buguoliang"
 
 
 Step1=1
