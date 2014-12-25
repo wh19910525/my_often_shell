@@ -12,8 +12,8 @@ android_source_code_list="android_rockchip_xm6321_4_4_4_git_list"
 git_repositories_name_prefix="rk_intel_444"
 
 current_source_code_top_dir=`which $android_source_code_list`
-#write_git_source_codei_list="wb_git_gly@pbserver wanghai_157 wanghaifei legang ShuaiNanXiang ChenYinJun DingYuBin LeGang_r yuanhaiping xinkun liuxingde qichaomin zhangjuyuan zjk zhaojingrong laiyuanzhao liuwei huangsheng panyiwen"
-write_git_source_codei_list="wb_git_gly@pbserver wanghai_157 qichaomin huangsheng panyiwen liuwei liuxingde hulin"
+write_git_source_codei_list="wb_git_gly@pbserver wanghai_157 wanghaifei legang ShuaiNanXiang ChenYinJun DingYuBin LeGang_r yuanhaiping xinkun liuxingde qichaomin zhangjuyuan zjk zhaojingrong laiyuanzhao liuwei huangsheng panyiwen hulin"
+#write_git_source_codei_list="wb_git_gly@pbserver wanghai_157 qichaomin huangsheng panyiwen liuwei liuxingde hulin"
 read_git_source_code_list="tanglei"
 
 
