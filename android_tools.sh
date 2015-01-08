@@ -142,6 +142,7 @@ Compressed_modify_system_img(){
     echo -en "\033[33m"
     echo 
     echo "new system.img save in save_new_system_img/"
+    echo "请用 new_system.img 替换之前 固件里 老的 system.img !!"
     echo 
     echo -en "\033[0m"
     #nautilus save_new_system_img
