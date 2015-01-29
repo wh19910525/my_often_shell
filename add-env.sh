@@ -9,7 +9,7 @@ current_path=`pwd`
 ###### 1. main func ######
 my_bin_path_loop=0
 MY_SHELL_BIN_PATH=$current_path
-Need_filter_dir=tools
+Need_filter_dir=not_in_globle_path
 
 
 for my_bin_dir in `ls $current_path`
@@ -25,7 +25,8 @@ do
 done
 ################
 #has_set_my_shell_bin_path=1
-GLOBLE_ENV_FILE="/etc/bash.bashrc"
+GLOBLE_ENV_FILE=~/.bashrc
+#GLOBLE_ENV_FILE="/etc/bash.bashrc"
 has_add_globle_env=0
 
 ##### if set flag, the following code will not be executed #####
@@ -66,6 +67,5 @@ fi
 	echo
 
 	echo -en "\033[0m"
-
 
 
