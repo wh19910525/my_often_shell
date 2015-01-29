@@ -1,0 +1,3 @@
+[submodule "not_in_globle_path/frank_repo"]
+	path = not_in_globle_path/frank_repo
+	url = git@github.com:wh19910525/frank_repo.git
