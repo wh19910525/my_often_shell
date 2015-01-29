@@ -31,16 +31,31 @@ fi
 
 ############## Start ###############
 
+current_path=`pwd`
 get_source_code_file_path=`which $0`
 echo get_source_code_file_path=$get_source_code_file_path
 MY_repo_Top_dir=`dirname $get_source_code_file_path`
+Not_in_globle_dir=$MY_repo_Top_dir/not_in_globle_path
 MY_repo_Top_dir=$MY_repo_Top_dir/not_in_globle_path/frank_repo
 My_repo=$MY_repo_Top_dir/repo
 echo MY_repo_Top_dir=$MY_repo_Top_dir
 
 ########################
 
-$My_repo init -u /home/Neo/repo/repo-server/manifest.git
+
+if [ -e $My_repo ]; then
+    echo "repo has exist !!"
+else
+    echo "repo do not exist, so we get it !!"
+    cd $Not_in_globle_dir
+    tar xf frank_repo.tar.gz
+    cd -
+fi
+
+echo "repo init"
+$My_repo init -q -u /home/Neo/repo/repo-server/manifest.git 
+
+echo "repo sync"
 $My_repo sync
 
 #############################
