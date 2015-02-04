@@ -7,16 +7,16 @@
 loop=1
 current_path=`pwd`
 current_data=`date "+%Y_%m_%d_%H_%M_%S"`
-from_manifest_get_ok_git_on_git_server_dir=$current_path/from_manifest_get_ok_git_on_git_server_dir
+from_manifest_get_ok_git_on_git_server_dir=$current_path/intel_sofia_3g_5_0
 manifest_file=$current_path/.repo/manifest.xml
 exist_git_repositories_top_dir=$current_path/.repo/projects
 on_git_server_project_path=
 on_git_server_project_name=
 current_branch=master_2015_02_02
-manifest_repositories_name=sofia_3g_manifest.git
+manifest_repositories_name=sofia_3g_manifest
 manifest_def_xml=$from_manifest_get_ok_git_on_git_server_dir/$manifest_repositories_name/default.xml
 origin_frank=origin_frank
-manifest_fetch="git@192.168.2.5:from_manifest_get_ok_git_on_git_server_dir"
+manifest_fetch="git@192.168.2.5:intel_sofia_3g_5_0"
 
 
 create_all_child_project(){
@@ -42,9 +42,16 @@ do
             then
                 #echo "on_server_project_path=$on_git_server_project_path"
                 tmp1_project_name=${on_git_server_project_path%/*}
+                #echo "tmp1_project_name=$tmp1_project_name"
                 tmp2_project_name=${tmp1_project_name:1}
+                #echo "tmp2_project_name=$tmp2_project_name"
+                tmp3_project_name=${on_git_server_project_path##*/}
+                #echo "tmp3_project_name=$tmp3_project_name"
+                tmp4_project_name=${tmp3_project_name//\"/}
+                #echo "tmp4_project_name=$tmp4_project_name"
                 mkdir -p $from_manifest_get_ok_git_on_git_server_dir/$tmp2_project_name
                 flag1_save_on_git_server_path=$tmp2_project_name
+                flag2_save_on_git_server_name=$tmp4_project_name
 
             fi
 
@@ -61,15 +68,9 @@ do
                 #echo "tmp4_project_name=$tmp4_project_name"
                 #echo "flag1_save_on_git_server_path=$flag1_save_on_git_server_path"
                 cd $current_path/$tmp2_project_name
-#                git checkout -b $current_branch
-#                git clone --bare $current_path/$tmp2_project_name $from_manifest_get_ok_git_on_git_server_dir/$flag1_save_on_git_server_path/$tmp4_project_name.git
+                git checkout -b $current_branch
+                git clone --bare $current_path/$tmp2_project_name $from_manifest_get_ok_git_on_git_server_dir/$flag1_save_on_git_server_path/$flag2_save_on_git_server_name.git
 
-
-
-
-
-
-                #echo "          cp -rf $exist_git_repositories_top_dir/$tmp2_project_name.git $from_manifest_get_ok_git_on_git_server_dir/$flag1_save_on_git_server_path"
             fi
 
         done
@@ -93,11 +94,20 @@ create_manifest_res(){
     cp $manifest_file $manifest_def_xml
     sed -i '/<default/c\'"${replace_default_lable}"'' $manifest_def_xml
     sed -i '/<remote/c\'"${replace_remote_lable}"'' $manifest_def_xml
+    cd $from_manifest_get_ok_git_on_git_server_dir/$manifest_repositories_name
+    git init . 
+    git add .
+    git commit -m"first init manifest"
+    #git checkout -b $current_branch
+    #git branch -d master
+    
+    git clone --bare $from_manifest_get_ok_git_on_git_server_dir/$manifest_repositories_name $from_manifest_get_ok_git_on_git_server_dir/$manifest_repositories_name.git
+    rm $from_manifest_get_ok_git_on_git_server_dir/$manifest_repositories_name -rf
 
 }
 
 ######### main #########
-create_all_child_project
+#create_all_child_project
 create_manifest_res
 
 
