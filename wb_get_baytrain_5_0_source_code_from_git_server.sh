@@ -49,7 +49,7 @@ cp $MY_repo_Top_dir/* .repo/repo/ -rf
 
 
 #echo "2. repo sync"
-$My_repo sync -q
+$My_repo sync -q -j8
 
 cd -
 
