@@ -6,10 +6,10 @@
 
 ############## Start ###############
 
-export delete_repo_string=git@192.168.2.5:intel_baytrain_5_0/
-server_manifest_path="git@192.168.2.5:intel_baytrain_5_0/baytrain_5_0_manifest.git"
+export delete_repo_string=git@192.168.2.5:intel_sofia_3g_5_0/
+server_manifest_path="git@192.168.2.5:intel_sofia_3g_5_0/sofia_3g_manifest.git"
 current_data=`date "+%Y_%m_%d_%H_%M_%S"`
-source_code_top_dir=baytrain_5_0_$current_data
+source_code_top_dir=sofia_3g_5_0_$current_data
 current_path=`pwd`
 get_source_code_file_path=`which $0`
 #echo get_source_code_file_path=$get_source_code_file_path
