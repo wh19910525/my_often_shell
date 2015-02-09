@@ -15,21 +15,19 @@ get_source_code_file_path=`which $0`
 #echo get_source_code_file_path=$get_source_code_file_path
 MY_repo_Top_dir=`dirname $get_source_code_file_path`
 Not_in_globle_dir=$MY_repo_Top_dir/not_in_globle_path
-MY_repo_Top_dir=$MY_repo_Top_dir/not_in_globle_path/frank_repo
+MY_repo_Top_dir=$MY_repo_Top_dir/not_in_globle_path/baytrain_5_0_repo
 My_repo=$MY_repo_Top_dir/repo
 
 ########################
 
 
 if [ -e $My_repo ]; then
-    #echo "repo has exist !!"
     echo repo_Top_dir=$MY_repo_Top_dir
-else
-    echo "repo do not exist, so we tar x it !!"
-    cd $Not_in_globle_dir
-    tar xf frank_repo.tar.gz
-    cd -
+    rm $MY_repo_Top_dir -rf
 fi
+    cd $Not_in_globle_dir
+    tar xf baytrain_5_0_repo.tar.gz
+    cd -
 
 mkdir $source_code_top_dir
 cd $source_code_top_dir
