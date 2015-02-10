@@ -43,7 +43,7 @@ fi
         echo "members = $write_git_source_codei_list" >> $git_admin_config
         echo >> $git_admin_config
         
-        echo "[group baytrain_3g_5_0_${modify_tmp}_ro_$loop]" >> $git_admin_config
+        echo "[group baytrain_5_0_${modify_tmp}_ro_$loop]" >> $git_admin_config
         echo "readonly = $android_top_dir/$tmp" >> $git_admin_config
         echo "members = $read_git_source_code_list" >> $git_admin_config
         echo >> $git_admin_config
