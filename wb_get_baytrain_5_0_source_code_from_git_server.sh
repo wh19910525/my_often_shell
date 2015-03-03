@@ -52,6 +52,16 @@ $My_repo sync -q -j8
 #echo "3. switch branch"
 $My_repo forall -c "pwd;git checkout -t remotes/origin_frank/master_2015_02_02"
 
+#4. create auto compile soft link
+auto_compile_shell=auto-compile-android-src-code.sh
+if [ ! -L $auto_compile_shell -a -e frameworks ];then
+    if [ -e $auto_compile_shell ];then
+        rm $auto_compile_shell
+    fi  
+    echo "create soft link ..."
+    ln -s build/$auto_compile_shell $auto_compile_shell
+fi
+
 cd -
 
 end_time=`date "+%Y-%m-%d %H:%M:%S"`
