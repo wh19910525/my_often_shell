@@ -56,7 +56,7 @@ $My_repo forall -c "pwd;git checkout -t remotes/origin_frank/master_2015_02_02"
 auto_compile_shell=auto-compile-android-src-code.sh
 if [ ! -L $auto_compile_shell -a -e frameworks ];then
     if [ -e $auto_compile_shell ];then
-        rm $auto_compile_shell
+        rm $auto_compile_shell -f
     fi  
     echo "create soft link ..."
     ln -s build/$auto_compile_shell $auto_compile_shell
