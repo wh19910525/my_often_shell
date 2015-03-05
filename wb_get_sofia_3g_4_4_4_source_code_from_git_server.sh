@@ -50,7 +50,7 @@ cp $MY_repo_Top_dir/* .repo/repo/ -rf
 $My_repo sync -q -j8
 
 #echo "3. switch branch"
-$My_repo forall -c "pwd;git checkout -t remotes/origin_frank/master_2015_02_02"
+$My_repo forall -c "pwd;git checkout -t remotes/origin/master_2015_02_02"
 
 #4. create auto compile soft link
 auto_compile_shell=auto-compile-android-src-code.sh
