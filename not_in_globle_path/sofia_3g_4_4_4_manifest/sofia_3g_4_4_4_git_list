@@ -452,3 +452,7 @@ a/imc/iwlwifi/xVT_service
 a/imc/xmm6421/delivery_modem
 a/intel/license
 sofia_3g_manifest
+a/bsp/soclib
+a/bsp/mobilevisor/pal
+a/bsp/mobilevisor/guests
+a/bsp/bootsystems
