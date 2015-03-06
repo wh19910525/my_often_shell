@@ -17,7 +17,7 @@ echo "manifest_file_path=$manifest_file_path"
 #git_admin_config=gitosis.conf
 git_admin_config="008_intel_baytrain_5_0.txt"
 android_top_dir="intel_baytrain_5_0"
-write_git_source_codei_list="wb_git_gly wanghai_157 wanghaifei legang ShuaiNanXiang ChenYinJun DingYuBin LeGang_r yuanhaiping xinkun liuxingde qichaomin zhangjuyuan zjk zhaojingrong laiyuanzhao liuwei huangsheng panyiwen hulin huangjiyu"
+write_git_source_codei_list="wb_git_gly wanghai_157 wanghaifei legang ShuaiNanXiang ChenYinJun DingYuBin LeGang_r yuanhaiping xinkun liuxingde qichaomin zhangjuyuan zjk zhaojingrong laiyuanzhao liuwei huangsheng panyiwen hulin huangjiyu hesl"
 read_git_source_code_list="tanglei buguoliang zhonglongcai chenqi"
 
 
