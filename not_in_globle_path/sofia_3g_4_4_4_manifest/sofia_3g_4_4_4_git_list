@@ -456,3 +456,4 @@ a/bsp/soclib
 a/bsp/mobilevisor/pal
 a/bsp/mobilevisor/guests
 a/bsp/bootsystems
+a/bsp/vendor/intel/apps/FileManager
