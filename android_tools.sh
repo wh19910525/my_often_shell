@@ -11,13 +11,27 @@ Para4=
 
 if [ $# -eq 1 ];then
     Para1=$1
-    Para2=system.img
+    if [ $1 == "-d" ];then
+#        echo Para2=system.img
+        Para2=system.img
+    elif [ $1 == "-c" ];then
+        Para2=1073741824
+    fi
 elif [ $# -eq 2 ];then
     Para1=$1
+    if [ $1 == "-c" ];then
+        Para2=1073741824
+    else
     Para2=$2
+    fi
 elif [ $# -eq 3 ];then
     Para1=$1
     Para2=$2
+    if [ $1 == "-c" -a $2 == "-size" ];then
+        Para2=$3
+    else
+        Para2=1073741824
+    fi
     Para3=$3
 elif [ $# -eq 4 ];then
     Para1=$1
@@ -68,7 +82,7 @@ Program_has_func_list () {
     echo    "******************************************************************************************";
     echo    "# 使用方法:                                                                              #";
     echo    "#     功能1 : ./android_tools.sh -d system.img --> 解压 system.img [$modify_system_img]   #";
-    echo    "#     功能2 : ./android_tools.sh -c        --> 创建 [save_new_system_img/new_system.img] #";
+    echo    "#     功能2 : ./android_tools.sh -c [-size 1073741824] --> 创建 [save_new_system_img/new_system.img] #";
     echo    "#     功能3 : ./android_tools.sh -clean        --> 清空 当前目录                         #";
     echo    "#                                                                                        #";
     echo    "******************************************************************************************";
@@ -117,8 +131,6 @@ Unzip_system_img(){
     echo "Unzip $Para2 finished, you can modify something in [$modify_system_img] dir!!"
     echo
     echo -en "\033[0m"
-   
-
 }
 
 ######### func3 #########
@@ -128,7 +140,7 @@ Compressed_modify_system_img(){
     echo -en "\033[32m"
     echo "Compressed $modify_system_img to new_system.img"
     echo -en "\033[0m"
-    $baytrain_444_bin_path/mkuserimg.sh -s $modify_system_img/ save_new_system_img/new_system.img ext4 system 1073741824 $baytrain_444_bin_path/file_contexts
+    $baytrain_444_bin_path/mkuserimg.sh -s $modify_system_img/ save_new_system_img/new_system.img ext4 system $Para2 $baytrain_444_bin_path/file_contexts
     if [ $? -ne 0 ]; then
         echo -en "\033[33m"
         echo 
@@ -181,12 +193,16 @@ if [ $# -eq 0 ];then
     Program_has_func_list
     exit 0
 elif [ $Para1 == '-d' ];then
+#    echo "Para1 = $Para1"
     Unzip_system_img
 elif [ $Para1 == '-c' ];then
+    echo "Size = $Para2"
     Compressed_modify_system_img
 elif [ $Para1 == '-clean' ];then
+#    echo "Para1 = $Para1"
     umount_modify_system_img
 elif [ $Para1 == '-v' ];then
+#    echo "Para1 = $Para1"
     show_version
 else
     echo -en "\033[32m"
