@@ -3,7 +3,6 @@
 #author:wanghai
 #############################
 
-
 ############## Start ###############
 
 export delete_repo_string=git@192.168.2.5:intel_sofia_3g_5_0/
@@ -60,6 +59,16 @@ if [ ! -L $auto_compile_shell -a -e frameworks ];then
     fi  
     echo "create soft link ..."
     ln -s build/$auto_compile_shell $auto_compile_shell
+
+else
+    cd android
+    if [ -e $auto_compile_shell ];then
+        rm $auto_compile_shell -f
+    fi  
+    echo "create soft link ..."
+    ln -s build/$auto_compile_shell $auto_compile_shell
+    cd - >> /dev/null
+
 fi
 
 cd -
