@@ -6,7 +6,7 @@
 loop=1
 current_data=`date "+%Y_%m_%d_%H_%M_%S"`
 
-android_top_dir=android_sofia_4.4.4_new1_source_code_$current_data
+android_top_dir=android_sofia_4_4_4_new1_source_code_$current_data
 git_server_addr=192.168.2.5
 on_git_server_android_source_code_name=intel_sofia_3g_n1_4_4_4
 aosp_dir_name=android
