@@ -10,5 +10,34 @@ alias wb_repo="wb_repo.sh"
 
 git clone git@192.168.2.5:intel_clovertral_p_android_4.4/ifwi_clvp_kk_w8.git
 
+############# 把一份源码 的每一个顶层目录 作为一个仓库 #############
+
+一、把 之前aosp 里的 .git .repo .gitignore 过滤掉;
+tar -czvf rootfs4.tar.gz ./rootfs4 --exclude=.git --exclude=.repo --exclude=.gitignore
+
+二、解压 rootfs4.tar.gz 到 rootfs4 目录;
+tar xvf rootfs4.tar.gz
+
+三、为 rootfs4 里的 每一个顶层目录 创建一个 git 仓库;
+执行 zgj1_create_all_dir_git_for_gitserver.sh rootfs4
+注意: 此脚本 有两大功能，
+    1. 为 每一个顶层目录 创建一个git仓库， 
+    2. 对每一个顶层目录的git仓库 使用 git clone --bare 命令，把每一个 导出到 新的目录 all_sub_dir_git_init里;
+
+四、把 Step 3 里 创建的 all_sub_dir_git_init 目录 放到 /home/git/ 下，作为 整个项目的 仓库, 以便工程师下载;
+注意: 执行 chown git:git . -R
+
+五、使用 管理员 为每一个人 添加下载权限，在 git server 上;
+
+六、添加下载脚本，以便下载代码;
+注意: 在 下载仓库列表里 要添加 android_top;
+
+
+
+
+
+
+
+
 
 

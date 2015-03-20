@@ -10,10 +10,12 @@ current_source_code_all_top_dir_list=$current_path/top_dir_list$current_data
 
 
 
+echo "
 ###################################
 ##### 1.Create all sub dir git ####
-###################################
-echo $#
+###################################"
+
+echo Aosp_project_name=$#
 
 Step1=1
 if [ $Step1 -eq 1 ]; then
@@ -26,14 +28,14 @@ if [ $# -eq 1 ]; then
             echo Starting init [$loop : $tmp] , waiting ....
 
             cd $current_source_code_top_dir/$tmp
-            ls 
+            #ls 
             echo git init .
             git init .
 
             echo git add .
             git add .
 
-            echo git commit -m"first init $tmp "
+            #echo git commit -m"first init $tmp "
             git commit -m" first init $tmp " >> /dev/null
 
             echo "init $tmp finish !!"
@@ -68,30 +70,30 @@ if [ $# -eq 1 ]; then
     echo finish all init for android source code !! 
     echo
 
-echo "###################################
+echo "
+###################################
 ##### end 1.Create all sub dir git ######
 ###################################"
+
     echo
-
-
-
 
 fi
 fi
 
 ##### end 1.Create all sub dir git ######
 
-
+echo "
 ###################################
 ##### 2.Get all sub dir git ######
-###################################
+###################################"
 
-#para1=$1
-#current_path=`pwd`
-#current_source_code_top_dir=$current_path/$para1
-#current_data=`date "+%Y-%m-%d-%H-%M-%S"`
-#current_source_code_all_top_dir_list=$current_path/top_dir_list$current_data
-
+if [ $Step1 -ne 1 ]; then
+para1=$1
+current_path=`pwd`
+current_source_code_top_dir=$current_path/$para1
+current_data=`date "+%Y-%m-%d-%H-%M-%S"`
+current_source_code_all_top_dir_list=$current_path/top_dir_list$current_data
+fi
 
 loop=1
 save_top_all_sub_dir_git=$current_path/all_sub_dir_git_init_$current_data
