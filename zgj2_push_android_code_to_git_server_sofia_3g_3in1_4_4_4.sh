@@ -5,6 +5,7 @@ current_path=`pwd`
 #current_source_code_top_dir=$current_path/$para1
 current_source_code_top_dir=`which $0`
 current_source_code_top_dir=${current_source_code_top_dir%/*}
+every_repositories_permissions_file=$current_source_code_top_dir/not_in_globle_path/git_repositories_per/every_repositories_permissions.txt
 current_source_code_top_dir=$current_source_code_top_dir/not_in_globle_path/sofia_3g_3in1_4_4_4_git_list
 echo "current_source_code_top_dir=$current_source_code_top_dir"
 
@@ -13,14 +14,21 @@ echo "current_source_code_top_dir=$current_source_code_top_dir"
 #git_admin_config=gitosis.conf
 git_admin_config="009_intel_sofia_3g_3in1_4_4_4.txt"
 android_top_dir="intel_sofia_3g_3in1_4_4_4"
-write_git_source_codei_list="wb_git_gly wanghai_157 wanghaifei legang ShuaiNanXiang ChenYinJun DingYuBin LeGang_r yuanhaiping xinkun liuxingde qichaomin zhangjuyuan zjk zhaojingrong laiyuanzhao liuwei huangsheng panyiwen hulin huangjiyu hesl"
-read_git_source_code_list="tanglei buguoliang zhonglongcai chenqi"
 
+######### add everyone permissions for repositories #########
+while read ev_line
+do
+    if [ "write_git_source_codei_list" = ${ev_line%=*} ];then
+        write_git_source_codei_list=${ev_line#*=}
+    elif [ "read_git_source_code_list" = ${ev_line%=*} ];then
+        read_git_source_code_list=${ev_line#*=}
+    fi
+done < $every_repositories_permissions_file
+##################
 
 Step1=1
 if [ $Step1 -eq 1 ];then
 
- 
 if [ -e $git_admin_config ];then
     rm $git_admin_config
 fi

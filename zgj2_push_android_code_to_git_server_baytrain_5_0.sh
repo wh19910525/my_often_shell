@@ -8,6 +8,7 @@ loop=1
 current_path=`pwd`
 current_source_code_top_dir=`which zgj2_push_android_code_to_git_server_baytrain_5_0.sh`
 current_source_code_top_dir=${current_source_code_top_dir%/*}
+every_repositories_permissions_file=$current_source_code_top_dir/not_in_globle_path/git_repositories_per/every_repositories_permissions.txt
 echo "current_source_code_top_dir=$current_source_code_top_dir"
 manifest_file_path=$current_source_code_top_dir/not_in_globle_path/baytrain_5_0_manifest/baytrain_5_0_repo_res_list
 echo "manifest_file_path=$manifest_file_path"
@@ -17,13 +18,20 @@ echo "manifest_file_path=$manifest_file_path"
 #git_admin_config=gitosis.conf
 git_admin_config="008_intel_baytrain_5_0.txt"
 android_top_dir="intel_baytrain_5_0"
-write_git_source_codei_list="wb_git_gly wanghai_157 wanghaifei legang ShuaiNanXiang ChenYinJun DingYuBin LeGang_r yuanhaiping xinkun liuxingde qichaomin zhangjuyuan zjk zhaojingrong laiyuanzhao liuwei huangsheng panyiwen hulin huangjiyu hesl"
-read_git_source_code_list="tanglei buguoliang zhonglongcai chenqi"
 
+######### add everyone permissions for repositories #########
+while read ev_line
+do
+    if [ "write_git_source_codei_list" = ${ev_line%=*} ];then
+        write_git_source_codei_list=${ev_line#*=}
+    elif [ "read_git_source_code_list" = ${ev_line%=*} ];then
+        read_git_source_code_list=${ev_line#*=}
+    fi
+done < $every_repositories_permissions_file
+##################
 
 Step1=1
 if [ $Step1 -eq 1 ];then
-
  
 if [ -e $git_admin_config ];then
     rm $git_admin_config
