@@ -10,7 +10,10 @@ android_top_dir=android_baytrain_m_5_0_source_code_$current_data
 git_server_addr=192.168.2.5
 on_git_server_android_source_code_name=intel_baytrain_m_5_0
 
-get_source_code_sub_dir_list_path=`which android_4_4_4_bytrain_git_list`
+current_source_code_top_dir=`which $0`
+current_source_code_top_dir=${current_source_code_top_dir%/*}
+current_source_code_top_dir=$current_source_code_top_dir/not_in_globle_path/baytrain_m_5_0_git_list
+get_source_code_sub_dir_list_path=$current_source_code_top_dir
 echo get_source_code_sub_dir_list_path=$get_source_code_sub_dir_list_path
 current_path=`pwd`
 

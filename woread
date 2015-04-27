@@ -13,7 +13,7 @@ git clone git@192.168.2.5:intel_clovertral_p_android_4.4/ifwi_clvp_kk_w8.git
 ############# 把一份源码 的每一个顶层目录 作为一个仓库 #############
 
 一、把 之前aosp 里的 .git .repo .gitignore 过滤掉;
-tar -czvf rootfs4.tar.gz ./rootfs4 --exclude=.git --exclude=.repo --exclude=.gitignore
+tar -czvf rootfs4.tar.gz ./rootfs4 --exclude=.git* --exclude=.repo --exclude=.gitignore
 
 二、解压 rootfs4.tar.gz 到 rootfs4 目录;
 tar xvf rootfs4.tar.gz
