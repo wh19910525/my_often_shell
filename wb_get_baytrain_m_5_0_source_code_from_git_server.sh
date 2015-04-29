@@ -72,6 +72,10 @@ if [ $Step1 -eq 1 ]; then
         rm android_top -rf
     fi
 
+    #laji, if this no exist, compile error
+    mkdir external/chromium_org/third_party/angle/.git
+    touch external/chromium_org/third_party/angle/.git/index
+
 
     echo -en "\033[35m"
 
