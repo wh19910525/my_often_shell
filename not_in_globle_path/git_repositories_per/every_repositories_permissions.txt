@@ -1,2 +1,2 @@
-write_git_source_codei_list=wb_git_gly wanghai_157 wanghaifei legang ShuaiNanXiang ChenYinJun DingYuBin LeGang_r yuanhaiping xinkun liuxingde qichaomin zhangjuyuan zjk zhaojingrong laiyuanzhao liuwei huangsheng panyiwen hulin huangjiyu hesl heshuilong qinfeng fei_public xuhaihua qingfeng_user0001
+write_git_source_codei_list=wb_git_gly wanghai_157 wanghaifei legang ShuaiNanXiang ChenYinJun DingYuBin LeGang_r yuanhaiping xinkun liuxingde qichaomin zhangjuyuan zjk zhaojingrong laiyuanzhao liuwei huangsheng panyiwen hulin huangjiyu hesl heshuilong qinfeng fei_public xuhaihua qingfeng_user0001 zjy_06_29
 read_git_source_code_list=tanglei buguoliang zhonglongcai chenqi wulanshi liuzhiqiang zjy-2015-05-26
