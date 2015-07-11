@@ -28,7 +28,7 @@ current_data=`date "+%Y_%m_%d_%H_%M_%S"`
 
 #############################
 
-android_top_dir=android_4.4_source_code_$current_data
+android_top_dir=android_clovertral_p_4_4_2_source_code_$current_data
 git_server_addr=192.168.2.5
 on_git_server_android_source_code_name=intel_clovertral_p_android_4.4
 
