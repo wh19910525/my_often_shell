@@ -28,6 +28,9 @@ tar xvf rootfs4.tar.gz
 注意: 执行 chown git:git . -R
 
 五、使用 管理员 为每一个人 添加下载权限，在 git server 上;
+需要实现两部分:
+1、添加仓库list,  not_in_globle_path/xxx_git_list
+2、添加 权限控制脚本 zgj2_push_android_code_to_git_server_xxx.sh
 
 六、添加下载脚本，以便下载代码;
 注意: 在 下载仓库列表里 要添加 android_top;
