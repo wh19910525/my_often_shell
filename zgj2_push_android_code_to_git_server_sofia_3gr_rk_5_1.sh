@@ -13,7 +13,7 @@ echo "current_source_code_top_dir=$current_source_code_top_dir"
 
 #git_admin_config=gitosis.conf
 git_admin_config="010_rk_sofia_3gr_5_1.txt"
-android_top_dir="rk_sofia_3gr_5_1"
+android_top_dir="rockchip_sofia3gr_5_1"
 
 ######### add everyone permissions for repositories #########
 while read ev_line
