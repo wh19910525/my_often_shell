@@ -7,7 +7,7 @@ loop=1
 current_data=`date "+%Y_%m_%d_%H_%M_%S"`
 
 android_top_dir=android_baytrain_4.4.4_source_code_$current_data
-git_server_addr=192.168.2.5
+git_server_addr=10.92.11.203
 on_git_server_android_source_code_name=intel_baytrain_android_4_4_4
 
 get_source_code_sub_dir_list_path=`which android_4_4_4_bytrain_git_list`
