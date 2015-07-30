@@ -11,7 +11,7 @@ echo "current_source_code_top_dir=$current_source_code_top_dir"
 #git_admin_config=gitosis.conf
 git_admin_config="005_bytrain_code_4_4_4_user.txt"
 android_top_dir="intel_baytrain_android_4_4_4"
-write_git_source_codei_list="codeserver@codeserver-Lenovo rk_server_wanghai"
+write_git_source_codei_list="codeserver@codeserver-Lenovo rk_server_wanghai compile_server"
 read_git_source_code_list="t1"
 
 
