@@ -6,7 +6,7 @@
 loop=1
 current_data=`date "+%Y_%m_%d_%H_%M_%S"`
 
-android_top_dir=android_baytrain_4_4_4_source_code_$current_data
+android_top_dir=baytrain_4_4_4_tablet_source_code_$current_data
 on_git_server_android_source_code_name=cm_intel_baytrain_android_4_4_4
 
 current_source_code_top_dir=`which $0`
