@@ -7,12 +7,12 @@ loop=1
 current_data=`date "+%Y_%m_%d_%H_%M_%S"`
 
 android_top_dir=android_baytrain_4_4_4_source_code_$current_data
-git_server_addr=10.92.11.203
-on_git_server_android_source_code_name=cm_intel_baytrain_android_4_4_4
+on_git_server_android_source_code_name=cm_crbox_intel_baytrain_android_4_4_4
 
 current_source_code_top_dir=`which $0`
 current_source_code_top_dir=${current_source_code_top_dir%/*}
-current_source_code_top_dir=$current_source_code_top_dir/not_in_globle_path/cm_intel_baytrain_4_4_4_git_list
+git_server_config_file=$current_source_code_top_dir/not_in_globle_path/git_repositories_per/every_repositories_permissions.txt
+current_source_code_top_dir=$current_source_code_top_dir/not_in_globle_path/cm_intel_crbox_baytrain_4_4_4_git_list
 get_source_code_sub_dir_list_path=$current_source_code_top_dir
 echo get_source_code_sub_dir_list_path=$get_source_code_sub_dir_list_path
 current_path=`pwd`
@@ -31,6 +31,18 @@ else
     exit 1
 
 fi
+
+######### get git-server addr #########
+while read ev_line
+do
+    if [ "git_server_ip" = ${ev_line%=*} ];then
+        git_server_addr=${ev_line#*=}
+    else #def
+        git_server_addr=10.92.11.203
+    fi
+done < $git_server_config_file
+echo "git_server_ip = $git_server_addr"
+##################
 
 
 #############################
