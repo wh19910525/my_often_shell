@@ -14,6 +14,7 @@ hardware
 libcore
 libnativehelper
 linux
+wb_project
 android_top
 manifests
 ndk
