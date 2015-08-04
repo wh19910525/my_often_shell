@@ -1,3 +1,3 @@
-write_git_source_codei_list=codeserver@codeserver-Lenovo rk_server_wanghai compile_server
+write_git_source_codei_list=codeserver@codeserver-Lenovo rk_server_wanghai compile_server lizhidan
 read_git_source_code_list=t1
 git_server_ip=10.92.11.203
