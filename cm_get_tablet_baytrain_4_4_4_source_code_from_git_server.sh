@@ -6,13 +6,17 @@
 loop=1
 current_data=`date "+%Y_%m_%d_%H_%M_%S"`
 
-android_top_dir=baytrain_4_4_4_tablet_source_code_$current_data
-on_git_server_android_source_code_name=cm_intel_baytrain_android_4_4_4
 
 current_source_code_top_dir=`which $0`
 current_source_code_top_dir=${current_source_code_top_dir%/*}
 git_server_config_file=$current_source_code_top_dir/not_in_globle_path/git_repositories_per/every_repositories_permissions.txt
+
+######### need modify part start #########
+android_top_dir=baytrain_4_4_4_tablet_source_code_$current_data
+on_git_server_android_source_code_name=cm_intel_baytrain_android_4_4_4
 current_source_code_top_dir=$current_source_code_top_dir/not_in_globle_path/cm_intel_baytrain_4_4_4_git_list
+######### need modify part end #########
+
 get_source_code_sub_dir_list_path=$current_source_code_top_dir
 echo get_source_code_sub_dir_list_path=$get_source_code_sub_dir_list_path
 current_path=`pwd`
@@ -83,6 +87,13 @@ if [ $Step1 -eq 1 ]; then
         
         rm android_top -rf
     fi
+
+
+    ############### get public code start ################
+    git clone  git@$git_server_addr:public_faddpart/zaddpart.git
+    echo "$loop : Clone public_faddpart/zaddpart.git successed!!"
+    ############### get public code end ################
+
 
     #laji, if this no exist, compile error
     mkdir external/chromium_org/third_party/angle/.git
