@@ -1,15 +1,21 @@
-echo -en "\033[34m"
+#! /bin/bash
+#############################
+#author:wanghai
+#############################
 
-echo "convert '10.8.9.5' to 'git.myamlogic.com' "
-sed -i 's/10.8.9.5/git.myamlogic.com/' .git/config
+echo -en "\033[35m"
 
-git pull
-
-echo "========="
-
-echo "convert 'git.myamlogic.com' to '10.8.9.5'"
-sed -i 's/git.myamlogic.com/10.8.9.5/' .git/config
-
-git pull
+for tmp in `ls`
+do
+    if [ -d $tmp -a -e $tmp/.git/config ];then
+        echo "-------- $tmp -------"
+        cd $tmp
+        echo "convert '10.92.11.203' to '10.92.11.178' "
+        sed -i 's/10.92.11.203/10.92.11.178/' .git/config
+        cd -
+        echo
+    fi
+done
 
 echo -en "\033[0m"
+
