@@ -10,7 +10,6 @@ developers
 development
 device
 docs
-external
 frameworks
 hardware
 libcore
@@ -26,3 +25,5 @@ sdk
 system
 tools
 vendor
+wb_project
+external
