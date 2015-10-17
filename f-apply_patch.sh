@@ -12,12 +12,15 @@ do
 
         if [ $? -ne 0 ];then
            echo -e "\033[;34m$patch_path/$tmp_p failed ...  \033[0m" 
+            mv $patch_path/$tmp_p $patch_path/failed/$tmp_p
         else
             echo "mkdir -p $patch_path/finish/"
             mkdir -p $patch_path/finish/
             mv $patch_path/$tmp_p $patch_path/finish/$tmp_p
         fi
 
+        git status  | grep .orig | xargs rm >> /dev/null 2>&1
+#        rm *.orig >> /dev/null 2>&1
         echo -e "\033[;36mInput Enter continue ... \033[0m "
         read f_Confirm
 
