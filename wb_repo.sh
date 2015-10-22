@@ -575,7 +575,7 @@ if [ $# -ne 0 ]; then
 
     else
 
-        usage_color "Please in android 4.4 top dir ,Using this cmd!!"
+        usage_color "Please in android Top dir ,Using this cmd!!"
         exit 1
 
     fi
