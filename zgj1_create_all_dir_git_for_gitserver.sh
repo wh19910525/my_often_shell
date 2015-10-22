@@ -1,3 +1,7 @@
+#! /bin/bash
+#############################
+#author:wanghai
+#############################
 
 para1=$1
 loop=1
@@ -5,10 +9,6 @@ current_path=`pwd`
 current_source_code_top_dir=$current_path/$para1
 current_data=`date "+%Y_%m_%d_%H_%M_%S"`
 current_source_code_all_top_dir_list=$current_path/top_dir_list$current_data
-
-
-
-
 
 echo "
 ###################################
