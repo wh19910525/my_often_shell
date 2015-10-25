@@ -5,3 +5,4 @@ baytrain_5_0_repo
 tools/Customer_tools_FW/
 tools/Modify_system_img_dir/
 *.swp
+*.~

@@ -94,13 +94,13 @@ if [ $Step1 -eq 1 ]; then
         git clone  git@$git_server_addr:public_faddpart/zaddpart.git
         echo "$loop : Clone public_faddpart/zaddpart.git successed!!"
         ############### get public code end ################
+
+
+        #laji, if this no exist, compile error
+        mkdir external/chromium_org/third_party/angle/.git
+        touch external/chromium_org/third_party/angle/.git/index
+
     fi
-
-
-    #laji, if this no exist, compile error
-    mkdir external/chromium_org/third_party/angle/.git
-    touch external/chromium_org/third_party/angle/.git/index
-
 
     echo -en "\033[35m"
 
