@@ -1,4 +1,8 @@
+#! /bin/bash
 
+#######################################
+# Author: hai.wang 
+#######################################
 
 gitosis_admin_path=~/works/gitosis-admin
 
@@ -14,6 +18,7 @@ permissions_config_file_tmp=$tools_top_dir/${permissions_file_name}-tmp
 #get all key, but not suffix
 get_all_soource_key=`ls $gitosis_admin_path/keydir`
 get_all_soource_key_prefix=${get_all_soource_key//.pub/}
+echo Member List: $get_all_soource_key_prefix
 
 #Step 2.replace write_git_source_codei_list string
 sed -i '/^write_git_source_codei_list=/d' $permissions_config_file
@@ -28,6 +33,7 @@ rm $permissions_config_file_tmp
 #Step 3.Add permissions for a new engineer
 cd $gitosis_admin_path
 company_szkj_push_public_code_to_git_server.sh
+merge_all_gitosis_config.sh
 git add .
 git commit -m"add new key"
 git push
