@@ -10,8 +10,8 @@ do
     if [ -d $tmp -a -e $tmp/.git/config ];then
         echo "-------- $tmp -------"
         cd $tmp
-        echo "convert '10.92.11.203' to '10.92.11.178' "
-        sed -i 's/10.92.11.203/10.92.11.178/' .git/config
+        echo "sed -i 's/10.92.11.178/10.91.11.183/' .git/config"
+        sed -i 's/10.92.11.178/10.91.11.183/' .git/config
         cd -
         echo
     fi
