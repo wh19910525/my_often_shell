@@ -6,8 +6,8 @@
 
 ############## Start ###############
 
-export delete_repo_string=git@192.168.2.5:intel_baytrain_5_0/
-server_manifest_path="git@192.168.2.5:intel_baytrain_5_0/baytrain_5_0_manifest.git"
+export delete_repo_string=git@10.91.11.183:intel_baytrain_5_0/
+server_manifest_path="git@10.91.11.183:intel_baytrain_5_0/baytrain_5_0_manifest.git"
 current_data=`date "+%Y_%m_%d_%H_%M_%S"`
 source_code_top_dir=baytrain_5_0_$current_data
 current_path=`pwd`

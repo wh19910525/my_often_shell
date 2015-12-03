@@ -6,7 +6,7 @@
 para1=$1
 loop=1
 current_path=`pwd`
-current_source_code_top_dir=`which zgj2_push_android_code_to_git_server_baytrain_5_0.sh`
+current_source_code_top_dir=`which dzgj2_push_android_code_to_git_server_baytrain_5_0.sh`
 current_source_code_top_dir=${current_source_code_top_dir%/*}
 every_repositories_permissions_file=$current_source_code_top_dir/not_in_globle_path/git_repositories_per/every_repositories_permissions.txt
 echo "current_source_code_top_dir=$current_source_code_top_dir"
