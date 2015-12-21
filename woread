@@ -24,6 +24,9 @@ tar xvf rootfs4.tar.gz
     1. 为 每一个顶层目录 创建一个git仓库，并且 做一个 commit; 
     2. 对每一个顶层目录的git仓库 使用 git clone --bare 命令，把每一个 导出到 新的目录 all_sub_dir_git_init里;
 
+Note: 前三步 已经实现了一个脚本 : zgj1_init_aosp.sh, 只需执行 此脚本 即可实现 前三步;
+
+
 四、把 Step 3 里 创建的 all_sub_dir_git_init 目录 放到 服务器的 /home/git/ 下，作为 整个项目的 仓库, 以便工程师下载;
 注意: 执行 chown git:git . -R
 
