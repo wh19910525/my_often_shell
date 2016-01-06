@@ -35,15 +35,8 @@ Note: 前三步 已经实现了一个脚本 : zgj1_init_aosp.sh, 只需执行 �
 1、添加仓库list, 使用zgj3_create_git_list.sh, 在 not_in_globle_path/ 下 创建 xxx_git_list 文件, 需要重命名;
 2、添加 权限控制脚本 zgj2_push_android_code_to_git_server_xxx.sh; 参考 frank3_push_public_code_to_git_server.sh
 
-六、添加下载脚本，以便下载代码;
+六、添加下载脚本 get_xxx.sh，以便下载代码;
 注意: 在 下载仓库列表里 要添加 android_top;
-
-
-
-
-
-
-
 
 
 

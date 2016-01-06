@@ -59,7 +59,7 @@ elif [ -e $para1 ];then
     #4.
     mv $para1 every_top_has_git_init_aosp
     cd -
-    rm $para1.tar.gz
+#    rm $para1.tar.gz
 
 else
     usage_color "$para1 does not exists ..."

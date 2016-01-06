@@ -18,7 +18,7 @@ echo "
 echo Aosp_project_name=$#
 
 Step1=1
-if [ $Step1 -eq 1 ]; then
+if [ $Step1 -eq 1 ]; then # git init every dir;
 if [ $# -eq 1 ]; then
 
     for tmp in `ls $current_source_code_top_dir`
