@@ -20,7 +20,8 @@ save_today_patch_path="$current_path/$all_patch_dir/$today_patch_dir"
 old_manirest_name="manifest_old_`date "+%Y-%m-%d-%H-%M"`"
 old_manifest_file="$save_today_patch_path/$old_manirest_name"
 
-repository_has_modified_flay=0 #0:no modify, 1:modify
+save_all_git_manifest="$save_today_patch_path/save_all_git_manifest"
+
 
 #######################################
 
@@ -58,6 +59,8 @@ if [ $# -ne 1 ];then
     Usage
 elif [ -d $para1 ];then
 
+Step_1=0
+#if [ $Step_1 -ne 0 ];then
 
 #1. get old manifest
     usage_color "1. Get old manifest ..."
@@ -120,6 +123,26 @@ elif [ -d $para1 ];then
     echo
     usage_color "Today patch : [$save_today_patch_path.zip]"
     echo
+#fi
+
+#6. get all git res manifest
+    usage_color "6. Zip all patch ..."
+    cd $current_path/$para1
+    
+    for every_to_dir in `ls` 
+    do
+        if [ -e $every_to_dir/.git ];then
+            #echo $every_to_dir
+            mkdir -p $save_all_git_manifest/$every_to_dir
+            cd $current_path/$para1/$every_to_dir
+            git whatchanged > $save_all_git_manifest/$every_to_dir/$every_to_dir-commit.log
+            cd $current_path/$para1
+        else
+            echo [$every_to_dir] is not a git res, skip ...
+        fi
+    done
+
+#7. 
 
 else
     usage_color "[$para1] does not exist or [$para1] is not dir file ..."
