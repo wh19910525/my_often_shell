@@ -114,19 +114,8 @@ Step_1=0
 
     echo
 
-#5. zip all patch
-    usage_color "5. Zip all patch ..."
-    cd $save_today_patch_path
-    zip -r $today_patch_dir.zip ./* >> /dev/null 2>&1
-    mv $today_patch_dir.zip ../
-
-    echo
-    usage_color "Today patch : [$save_today_patch_path.zip]"
-    echo
-#fi
-
-#6. get all git res manifest
-    usage_color "6. Get all git res manifest ..."
+#5. get all git res manifest
+    usage_color "5. Get all git res manifest ..."
     cd $current_path/$para1
     
     for every_to_dir in `ls` 
@@ -143,7 +132,19 @@ Step_1=0
         cd $current_path/$para1
     done
 
-#7. 
+#6. 
+
+
+#End. zip all patch
+    usage_color "End. Zip all patch ..."
+    cd $save_today_patch_path
+    zip -r $today_patch_dir.zip ./* >> /dev/null 2>&1
+    mv $today_patch_dir.zip ../
+
+    echo
+    usage_color "Today patch : [$save_today_patch_path.zip]"
+    echo
+#fi
 
 else
     usage_color "[$para1] does not exist or [$para1] is not dir file ..."
