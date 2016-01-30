@@ -126,7 +126,7 @@ Step_1=0
 #fi
 
 #6. get all git res manifest
-    usage_color "6. Zip all patch ..."
+    usage_color "6. Get all git res manifest ..."
     cd $current_path/$para1
     
     for every_to_dir in `ls` 
@@ -136,10 +136,11 @@ Step_1=0
             mkdir -p $save_all_git_manifest/$every_to_dir
             cd $current_path/$para1/$every_to_dir
             git whatchanged > $save_all_git_manifest/$every_to_dir/$every_to_dir-commit.log
-            cd $current_path/$para1
         else
             echo [$every_to_dir] is not a git res, skip ...
         fi
+
+        cd $current_path/$para1
     done
 
 #7. 
