@@ -14,7 +14,9 @@ para4=$4
 ################### Para ####################
 
 aosp_dir_path=
-every_tarFile_size=5m 
+
+#def value
+every_tarFile_size=1024m 
 
 current_path="`pwd`"
 pack_aosp_dir="pack_aosp_`date "+%Y-%m-%d"`"
