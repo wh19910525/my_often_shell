@@ -47,7 +47,7 @@ usage_color () {
 ####### funtion2 ########
 Usage(){
     usage_color "Usage :"
-    usage_color "   `basename $para0` Pack -d Aosp_dir -s Size]"
+    usage_color "   `basename $para0` Pack -d Aosp_dir [-s Size]"
     usage_color "   `basename $para0` Unpack Has_Pack_aosp_dir"
 }
 
@@ -75,7 +75,7 @@ Pack_aosp_sourc_code (){
     done
 
     if [ -z $aosp_dir_path ];then
-        usage_color "Usage : `basename $para0` [Pack] -d Aosp_dir -s Size]"
+        usage_color "Usage : `basename $para0` [Pack] -d Aosp_dir -s Size"
         exit 1
     fi
 
@@ -158,5 +158,8 @@ elif [ $para1 == "Unpack" ];then
     shift
     Unpack_aosp_sourc_code $@
     exit 0
+else
+    Usage
+    exit 2
 fi
 
