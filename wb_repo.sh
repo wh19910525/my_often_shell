@@ -43,6 +43,7 @@ wb_repo.sh [options]
         -- clean
         -- manifest
         -- sync
+        -- log
         -- help
 
 "
@@ -401,6 +402,25 @@ sync_m_manifest (){
 
 }
 
+####### funtion11 ########
+git_log (){
+    echo repositories : $globle_loop
+    if [ $# -eq 1 ]; then
+        cd $1 >> /dev/null
+        pwd
+        git branch 
+        git log 
+        cd - >> /dev/null
+    else
+        pwd
+        git branch
+        git log
+    fi
+
+    ((globle_loop++))
+    echo
+}
+
 ############# main func ##############
 if [ $# -ne 0 ]; then
 
@@ -496,6 +516,25 @@ if [ $# -ne 0 ]; then
             #echo ls $tmp/$dir_has_git
             if [ -e $dir_has_git ];then
                 git_pull
+            fi
+
+        ###### git log ######
+        elif [ x$para1 = x"log" ]; then
+
+            for tmp in `ls` 
+            do
+                #echo ls $tmp/$dir_has_git
+                if [ -e $tmp/$dir_has_git ];then
+                    if [ -d $tmp -a $tmp != .git -a $tmp != out -a $tmp != pub ]; then
+                        git_log $tmp
+                    fi        
+                fi
+
+            done
+
+            #echo ls $tmp/$dir_has_git
+            if [ -e $dir_has_git ];then
+                git_log
             fi
 
         ###### git push ######
