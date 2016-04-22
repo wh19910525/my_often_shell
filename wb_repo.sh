@@ -20,8 +20,6 @@ dir_has_git=".git/config"
 #############################
 
 android_top_dir=android_source_code_$current_data
-git_server_addr=192.168.2.5
-on_git_server_android_source_code_name=all_sub_dir_git_init_2014_06_07
 
 ####### funtion1 ########
 usage_color () {

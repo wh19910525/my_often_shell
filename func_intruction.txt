@@ -1,0 +1,38 @@
+
+==================================
+
+一. 若Android的 每一个顶层, 是一个git仓库, 可以使用以下脚本操作:
+
+1. wb_repo.sh -- 对每一个 顶层目录做 git xxx 动作;
+
+2. get_patch_from_manifest.sh -- 通过 比较 老的manifest 和 新的manifest 之间的差异, 获取 差异patch;
+
+3. f-get_repo_project_modify.sh -- 根据 google的manifest, 获取 他人修改google源码, 根据邮箱;
+
+4. 
+
+
+
+
+
+==================================
+
+二. 其他:
+
+1. fL_pack_Unpack_android_source_code.sh -- 此脚本有两大功能: 压缩 和 解压缩
+    a.对 源代码打包, 以每一个顶层目录 为单位 进行 tar, 可以指定每一个tar包的 大小;
+    b.对 使用此脚本 打包的代码 进行解压;
+
+
+==================================
+
+三. 网服务器放 rebase 代码:
+
+1. fadd_everyone_2_res.sh -- 此脚本 让 gitosis-admin/下的 merge_all_files2gitServer.sh脚本 调用，把 所有的仓库提交到 服务器;
+2. 
+
+
+
+==================================
+
+
