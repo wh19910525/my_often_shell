@@ -1,0 +1,33 @@
+#!/bin/bash
+
+#######################################
+# Author: hai.wang 
+#######################################
+
+############## function 1: oem_repo start ###############
+oem_repo(){
+    #echo "wb_repo.sh $1 $2 $3 $4 $5 $6"
+    wb_repo.sh $1 $2 $3 $4 $5 $6
+}
+
+oem_repo_support_para_list="branch pull status checkout push clean manifest sync log help"
+
+# Tab completion for oem_repo
+_oem_repo_auto_list(){
+
+    local cur prev
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    #echo "frank_zgj, Para=$cur"
+    #COMPREPLY=( $(compgen -W "${LUNCH_MENU_CHOICES[*]}" -- ${cur}) )
+    COMPREPLY=( $(compgen -W "${oem_repo_support_para_list}" -- ${cur}) )
+
+}
+
+complete -F _oem_repo_auto_list oem_repo
+############## function 1:oem_repo end ###############
+
+
+
+

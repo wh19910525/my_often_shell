@@ -11,6 +11,7 @@ my_bin_path_loop=0
 MY_SHELL_BIN_PATH=$current_path
 Need_filter_dir=not_in_globle_path
 
+oem_cmd_list_path=$MY_SHELL_BIN_PATH/$Need_filter_dir/oem_cmd_list
 
 for my_bin_dir in `ls $current_path`
 do
@@ -45,6 +46,7 @@ if [ $has_add_globle_env -eq 1 ]
 then
 	sed -i '/^MY_Often_Shell_PATH/ c\MY_Often_Shell_PATH='"${MY_SHELL_BIN_PATH}"'' $GLOBLE_ENV_FILE
 else
+    echo >> $GLOBLE_ENV_FILE
 	echo "###### add by wanghai, add my often use shell scrupt ###### " >> $GLOBLE_ENV_FILE
 #	echo "set my often use shell scrupt path : has_set_my_shell_bin_path=1"
 #	echo "has_set_my_shell_bin_path=1 >>  $GLOBLE_ENV_FILE"
@@ -53,8 +55,11 @@ else
 #	echo "set my often use shell bin path!"
 #	echo "export PATH=$PATH:$MY_SHELL_BIN_PATH >> $GLOBLE_ENV_FILE"
 	echo "MY_Often_Shell_PATH=$MY_SHELL_BIN_PATH" >> $GLOBLE_ENV_FILE
-    	echo "export PATH=\$PATH:\$MY_Often_Shell_PATH" >> $GLOBLE_ENV_FILE
+    echo "export PATH=\$PATH:\$MY_Often_Shell_PATH" >> $GLOBLE_ENV_FILE
 	echo >> $GLOBLE_ENV_FILE
+
+    echo "########## export oem cmds #########" >> $GLOBLE_ENV_FILE
+    echo "export OEM_CMD_PATH=$oem_cmd_list_path" >> $GLOBLE_ENV_FILE
 	echo >> $GLOBLE_ENV_FILE
 	echo >> $GLOBLE_ENV_FILE
 fi
