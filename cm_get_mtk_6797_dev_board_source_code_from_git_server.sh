@@ -90,8 +90,8 @@ if [ $Step1 -eq 1 ]; then
 
 
     ############### get public code start ################
-    git clone  git@$git_server_addr:public_faddpart/zaddpart.git
-    echo "$loop : Clone public_faddpart/zaddpart.git successed!!"
+    #git clone git@$git_server_addr:public_faddpart/zaddpart.git
+    #echo "$loop : Clone public_faddpart/zaddpart.git successed!!"
     ############### get public code end ################
 
     #laji, if this no exist, compile error
