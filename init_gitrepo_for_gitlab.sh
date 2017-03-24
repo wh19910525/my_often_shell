@@ -11,15 +11,17 @@ para4=$4
 
 #########################
 Debug_flag="false"
-init_aosp_repo_config_file="/disk2/works/my_often_shell/config_git_init_aosp_for_gitlab"
 #########################
 filter_files="--exclude=.git* --exclude=.repo --exclude=.gitignore"
-has_filter_files_zip_name="has_filter_aosp"
+has_filter_files_zip_name="has_filter_aosp.tar.gz"
 current_date=`date "+%Y-%m-%d-%H-%M-%S"`
 current_path=`pwd`
 tmp_dir="${current_path}/has_filter_tmp_dir_$current_date"
 tmp_manifest=manifest_tmp
 get_repo_bare_for_aosp=$tmp_dir/get_all_repo_bare_for_aosp
+
+bin_path=`which $para0`
+init_aosp_repo_config_file="${bin_path%/*}/config_git_init_aosp_for_gitlab"
 #########################
 
 
@@ -81,6 +83,12 @@ Analysis_config_for_clone_repo (){
     cd $tmp_dir/$para1
     for top_file_tmp in `ls`
     do
+        if [ ! -d $tmp_dir/$para1/$top_file_tmp ];then
+            echo
+            usage_color "skip $top_file_tmp"
+            continue
+        fi
+
         ((top_file_count++))
         echo
         ######### git init top level #########
@@ -111,8 +119,8 @@ Analysis_config_for_clone_repo (){
                 #go to aosp/first_top_dir/second_top_dir/
                 cd $tmp_dir/$para1/$top_file_tmp/$second_level_tmp_file
                 need_init_dir="$tmp_dir/$para1/$top_file_tmp/$second_level_tmp_file"
-
-                debug_print "    --------- second_level file=$second_level_tmp_file ---------"
+                echo
+                echo "    --------- second_level file=$second_level_tmp_file ---------"
                 debug_print "`pwd`"
 
                 #1.
@@ -154,19 +162,19 @@ elif [ -e $para1 ];then
 
     #del the "/" for dir ...
     para1=${para1//\//}
-    usage_color "[${para1}] exists ..."
 
     usage_color "1.Filter some files, such as .git .gitignore .repo ..."
-    tar -czf ${has_filter_files_zip_name}.tar.gz ./${para1} $filter_files
+    tar -czf ${has_filter_files_zip_name} ./${para1} $filter_files
 
     usage_color "2.Unzip previous step zip file ..."
     mkdir -p $tmp_dir
-    tar -xf ${has_filter_files_zip_name}.tar.gz -C $tmp_dir
+    tar -xf ${has_filter_files_zip_name} -C $tmp_dir
 
     usage_color "3.Git init all top dir, get clone all dir ..."
     Analysis_config_for_clone_repo
     
     mv $tmp_dir/$para1 $tmp_dir/aosp_has_init
+    mv $current_path/${has_filter_files_zip_name} $tmp_dir
 
 else
     usage_color "[$para1] dir does not exists ..."
