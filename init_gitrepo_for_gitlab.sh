@@ -10,13 +10,12 @@ para3=$3
 para4=$4
 
 #########################
-Debug_flag="true"
+Debug_flag="false"
 init_aosp_repo_config_file="/disk2/works/my_often_shell/config_git_init_aosp_for_gitlab"
 #########################
 filter_files="--exclude=.git* --exclude=.repo --exclude=.gitignore"
 has_filter_files_zip_name="has_filter_aosp"
-#current_date=`date "+%Y-%m-%d-%H-%M-%S"`
-current_date=20170324
+current_date=`date "+%Y-%m-%d-%H-%M-%S"`
 current_path=`pwd`
 tmp_dir="${current_path}/has_filter_tmp_dir_$current_date"
 tmp_manifest=manifest_tmp

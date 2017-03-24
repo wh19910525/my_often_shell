@@ -1,5 +1,3 @@
-abi
-build
 bootable=2
 system=2
-tbuild
+device=2
