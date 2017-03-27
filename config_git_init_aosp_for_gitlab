@@ -1,3 +1,6 @@
 bootable=2
 system=2
 device=2
+frameworks=2
+packages=2
+vendor=2
