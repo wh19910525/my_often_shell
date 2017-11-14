@@ -1,0 +1,126 @@
+#! /bin/bash
+#############################
+#author:wanghai
+#############################
+
+para0=$0
+para1=$1
+para2=$2
+para3=$3
+para4=$4
+
+#########################
+
+
+Author_name="wanghai(frank)"
+Mailbox_name="wanghai@nexgo.cn"
+#current_date=`date "+%Y-%m-%d, %H:%M"`
+current_date=`date "+%Y-%m-%d"`
+tmp_file="tmp_$current_date"
+
+
+def_file_header="\
+/*******************************************************
+ *******************************************************
+ **
+ ** Created By           : ${Author_name}
+ ** Created Date         : ${current_date}
+ ** Description          : 
+ **
+ *******************************************************
+ *******************************************************/
+"
+
+mk_file_header="\
+# *******************************************************
+# *******************************************************
+# **
+# ** Created By           : ${Author_name}
+# ** Created Date         : ${current_date}
+# ** Description          : 
+# **
+# *******************************************************
+# *******************************************************
+"
+xml_file_header="\
+# *******************************************************
+# *******************************************************
+# **
+# ** Created By           : ${Author_name}
+# ** Created Date         : ${current_date}
+# ** Description          : 
+# **
+# *******************************************************
+# *******************************************************
+"
+
+
+####### funtion1 ########
+usage_color () {
+    echo -en "\033[32m"
+    echo "  $1  "
+    echo -en "\033[0m"
+}
+
+####### funtion2 ########
+Usage(){
+    usage_color "Please use [`basename $para0` FileName]"
+}
+
+####### funtion3 ########
+
+
+
+
+
+
+
+
+
+############### main ###############
+
+echo "para cnt:$#"
+echo p1=${para1}
+
+file_suffix=${para1##*.}
+if [ $# -eq 1 ];then
+
+    #*.c/*.cpp
+    if [ `expr match $file_suffix "[C|c][P|p][P|p]$"` -ne 0 ] || 
+        [ `expr match $file_suffix "[C|c]$"` -ne 0 ];then
+        echo [${para1}] is c/c++ file.
+        file_header=${def_file_header}
+    #*.mk
+    elif [ $file_suffix == "mk" ];then
+        echo [${para1}] is Mk file.
+        file_header=${mk_file_header}
+    #*.java
+    elif [ $file_suffix == "java" ];then
+        echo [${para1}] is java file.
+        file_header=${def_file_header}
+    #*.xml
+    elif [ $file_suffix == "xml" ];then
+        echo [${para1}] is xml file.
+        file_header=${xml_file_header}
+    else
+        echo "FAIL"
+        file_header=${def_file_header}
+    fi
+fi
+
+if [ $# -ne 1 ];then
+    Usage
+elif [ -e $para1 ];then
+    usage_color "[$para1] exists ..."
+
+    cp ${para1} ${tmp_file}
+    echo "${file_header}" > ${para1}
+    cat ${tmp_file} >> ${para1}
+    rm ${tmp_file}
+
+    exit 2
+else
+    usage_color "[$para1] does not exists, so create it."
+    echo "${file_header}" > ${para1}
+fi
+
