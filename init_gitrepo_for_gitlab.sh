@@ -3,6 +3,10 @@
 #author:wanghai
 #############################
 
+#最终使用manifest_tmp 创建manifest仓库;
+
+#############################
+
 para0=$0
 para1=$1
 para2=$2
