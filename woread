@@ -10,6 +10,28 @@ alias wb_repo="wb_repo.sh"
 
 git clone git@192.168.2.5:intel_clovertral_p_android_4.4/ifwi_clvp_kk_w8.git
 
+############# 根据 config, 把一份源码 重新初始化为 多个git仓库, 用gitlab管理 #############
+
+一、把 之前aosp 里的 .git .repo .gitignore 过滤掉;
+
+二、解压 rootfs4.tar.gz 到 rootfs4 目录;
+
+三、据 config, 重新初始化对应的 git 仓库;
+    1. 为 每一个顶层目录 创建一个git仓库，并且 做一个 commit; 
+    2. 对每一个顶层目录的git仓库 使用 git clone --bare 命令，把每一个 导出到 新的目录 all_sub_dir_git_init里;
+
+Note: 前三步 已经实现了一个脚本 : [init_gitrepo_for_gitlab.sh], 只需执行 此脚本 即可实现 前三步;
+    执行 init_gitrepo_for_gitlab.sh rootfs4
+
+四、把 Step 3 里 创建的 get_all_repo_bare_for_aosp 目录, 放到 服务器的 [/var/opt/gitlab/git-data/repositories/] 下,
+    作为 整个项目的 仓库, 以便 下载;
+
+五、修改 服务器上的 get_all_repo_bare_for_aosp 仓库 权限, [chown git:git -R .];
+
+六、添加 manifest 仓库;
+
+七、下载代码;
+
 ############# 把一份源码 的每一个顶层目录 作为一个仓库 #############
 
 一、把 之前aosp 里的 .git .repo .gitignore 过滤掉;
@@ -37,33 +59,4 @@ Note: 前三步 已经实现了一个脚本 : zgj1_init_aosp.sh, 只需执行 �
 
 六、添加下载脚本 get_xxx.sh，以便下载代码;
 注意: 在 下载仓库列表里 要添加 android_top;
-
-############# 根据 config, 把一份源码 重新初始化为对应的仓库, 用gitlab管理 #############
-
-一、把 之前aosp 里的 .git .repo .gitignore 过滤掉;
-tar -czvf rootfs4.tar.gz ./rootfs4 --exclude=.git* --exclude=.repo --exclude=.gitignore
-
-二、解压 rootfs4.tar.gz 到 rootfs4 目录;
-tar xvf rootfs4.tar.gz
-
-三、据 config,重新初始化对应的 git 仓库;
-执行 zgj1_create_all_dir_git_for_gitserver.sh rootfs4
-注意: 此脚本 有两大功能，
-    1. 为 每一个顶层目录 创建一个git仓库，并且 做一个 commit; 
-    2. 对每一个顶层目录的git仓库 使用 git clone --bare 命令，把每一个 导出到 新的目录 all_sub_dir_git_init里;
-
-Note: 前三步 已经实现了一个脚本 : zgj1_init_aosp.sh, 只需执行 此脚本 即可实现 前三步;
-
-
-四、把 Step 3 里 创建的 all_sub_dir_git_init 目录 放到 服务器的 /home/git/ 下，作为 整个项目的 仓库, 以便工程师下载;
-注意: 执行 chown git:git . -R
-
-五、使用 管理员 为每一个人 添加下载权限，在 git server 上;
-需要实现两部分:
-1、创建仓库list, 在 all_sub_dir_git_init_xxx 目录下, 使用 zgj3_create_git_list.sh, 将在 not_in_globle_path/ 下 创建 xxx_git_list 文件, 需要重命名;
-2、添加 权限控制脚本 zgj2_push_android_code_to_git_server_xxx.sh; 参考 frank3_push_public_code_to_git_server.sh
-
-六、添加下载脚本 get_xxx.sh，以便下载代码;
-注意: 在 下载仓库列表里 要添加 android_top;
-
 

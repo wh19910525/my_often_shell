@@ -167,8 +167,8 @@ elif [ -e $para1 ];then
     #del the "/" for dir ...
     para1=${para1//\//}
 
-    usage_color "1.Filter some files, such as .git .gitignore .repo ..."
-    tar -czf ${has_filter_files_zip_name} ./${para1} $filter_files
+    usage_color "1.Filter some files, such as [.git .gitignore .repo] ..."
+    tar -cf ${has_filter_files_zip_name} ./${para1} $filter_files
 
     usage_color "2.Unzip previous step zip file ..."
     mkdir -p $tmp_dir
