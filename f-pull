@@ -5,17 +5,24 @@
 
 echo -en "\033[35m"
 
-for tmp in `ls`
+for tmp in `find . -name .git`
 do
-    if [ -d $tmp -a -e $tmp/.git/config ];then
-        echo "-------- $tmp -------"
+    if [ -d $tmp -a -e $tmp/config ];then
+        echo "-------- $tmp exist -------"
         cd $tmp
-        echo "sed -i 's/10.92.11.178/10.91.11.183/' .git/config"
-        sed -i 's/10.92.11.178/10.91.11.183/' .git/config
+        echo "modify [172.23.0.144] --> [10.150.130.8] $tmp/config"
+        sed -i 's/172.23.0.144/10.150.130.8/' config
         cd -
         echo
     fi
+
 done
+
+    if [ -e .repo/manifests.git/config ];then
+        echo "modify [172.23.0.144] --> [10.150.130.8] .repo/manifests.git/config"
+        sed -i 's/172.23.0.144/10.150.130.8/' .repo/manifests.git/config
+        echo
+    fi
 
 echo -en "\033[0m"
 

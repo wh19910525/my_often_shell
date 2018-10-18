@@ -1,0 +1,78 @@
+#! /bin/bash
+#############################
+#author:wanghai
+#############################
+
+if [ x$1 != x ];then
+    ip_address=$1
+fi
+
+ip_address="10.150.130.4"
+
+#单位:秒
+ping_timeout="1"
+
+ping_times="3"
+
+current_date=`date "+%Y-%m-%d"`
+state_file_path="/tmp/work_state/${current_date}"
+
+###########################################################
+
+############# func 001 #############
+print_color(){
+    echo -e "\033[;33m$1\033[0m"
+}
+
+############# func 002 #############
+check_status(){
+    ping ${ip_address} -c${ping_times} -W${ping_timeout} >> /dev/null 2>&1
+    poweron_result=`echo $?`
+
+    #echo ${poweron_result}
+
+    current_time=`date "+%Y-%m-%d %H:%M:%S"`
+    if [ ${poweron_result} -eq 0 ];then
+        echo "zgj, At-work"
+        echo "${current_time} : At work" >> ${state_file_path}
+        echo "${current_time}"  | mail -s "Notify:at work" 380892880@qq.com
+    else
+        print_color "zgj, Off-work, you can clock in."
+        echo "${current_time} : Off work, you can clock in" >> ${state_file_path}
+        echo "${current_time}, You can clock in"  | mail -s "Notify:Power off" 380892880@qq.com
+    fi
+}
+
+############################# main ##############################
+if [ ! -e `dirname ${state_file_path}` ];then
+    mkdir `dirname ${state_file_path}`
+fi
+
+if [ ! -e ${state_file_path} ];then
+    touch ${state_file_path}
+fi
+
+check_status
+has_send_mail_flag=0
+while true
+do
+    which_day=`date "+%w"`
+    if [ ${which_day} == 6 -o ${which_day} == 0 ];then
+        check_status
+    fi
+
+    cur_time=`date "+%Y-%m-%d %H:%M:%S"`
+    echo "pid:$$, today is ${which_day}, time=[${cur_time}]" >> /tmp/test_date
+
+    if [ ${which_day} != ${has_send_mail_flag} ];then
+        echo "pid:$$, today is ${which_day}, time=[${cur_time}]"  | mail -s "Notify:test work" 627691908@qq.com
+        check_status
+        has_send_mail_flag=${which_day}
+    fi
+
+    ((one_hour=1*60*60))
+
+    sleep ${one_hour}
+
+done
+
