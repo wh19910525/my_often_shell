@@ -17,17 +17,21 @@ git clone git@192.168.2.5:intel_clovertral_p_android_4.4/ifwi_clvp_kk_w8.git
 
 二、解压 rootfs4.tar.gz 到 rootfs4 目录;
 
-三、据 config, 重新初始化对应的 git 仓库;
+三、根据 config, 重新初始化对应的 git 仓库;
     1. 为 每一个顶层目录 创建一个git仓库，并且 做一个 commit; 
     2. 对每一个顶层目录的git仓库 使用 git clone --bare 命令，把每一个 导出到 新的目录 all_sub_dir_git_init里;
 
 Note: 前三步 已经实现了一个脚本 : [init_gitrepo_for_gitlab.sh], 只需执行 此脚本 即可实现 前三步;
     执行 init_gitrepo_for_gitlab.sh rootfs4
 
-四、把 Step 3 里 创建的 get_all_repo_bare_for_aosp 目录, 放到 服务器的 [/var/opt/gitlab/git-data/repositories/] 下,
-    作为 整个项目的 仓库, 以便 下载;
+四、把 Step 3 里 创建的 get_all_repo_bare_for_aosp 目录,
+    放到 服务器的 [/var/opt/gitlab/git-data/repositories/] 下,
+        作为 整个项目的 仓库, 以便 下载;
+
+    注意: 服务器上仓库的具体位置, 在 /etc/gitlab/gitlab.rb 里 设置, 查找 git_data_dir
 
 五、修改 服务器上的 get_all_repo_bare_for_aosp 仓库 权限, [chown git:git -R .];
+        然后 更新 仓库: sudo gitlab-rake gitlab:import:repos
 
 六、添加 manifest 仓库;
 
